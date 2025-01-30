@@ -17,12 +17,11 @@ class Label extends StatelessWidget {
   final TextScaler? scale;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      txt,
-      textScaler: scale,
-      textAlign: forceAlignment,
-      style: fontStyle(),
-    );
+    return Text(txt,
+        textScaler: scale,
+        textAlign: forceAlignment,
+        style: fontStyle(),
+        softWrap: true);
   }
 
   TextStyle fontStyle() {

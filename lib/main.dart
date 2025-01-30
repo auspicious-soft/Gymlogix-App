@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gymlogix/Pages/splash.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:gymlogix/features/presentation/screens/splash.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(const MyApp(
+  runApp(const ProviderScope(
+      child: MyApp(
     initialRoute: '/splash',
-  ));
+  )));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Gym Logix',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
