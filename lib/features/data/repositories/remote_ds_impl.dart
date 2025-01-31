@@ -17,8 +17,10 @@ class RemoteDsImpl implements RemoteRepo {
       if (loginData != null) {
         return Right(loginData);
       }
+    //  print("return from here");
       return Left(SomeSpecificError("Unable to fetch"));
     } catch (error) {
+       print("return ok from here ${error.toString()}");
       return Left(SomeSpecificError(error.toString()));
     }
   }

@@ -73,10 +73,11 @@ class LoginNotifier extends StateNotifier<AsyncValue<LoginModel?>> {
       state = const AsyncValue.loading();
       final data = await _loginUseCase.call(email: email, pass: pass);
 
-      data!.fold(
+      data.fold(
         (error) {
+          print("yes here error ${error.message}");
           state = AsyncValue.error(
-              error, StackTrace.fromString("Failed to fetch user"));
+              error.message, StackTrace.fromString("Failed to fetch user"));
         },
         (fineData) {
           state = AsyncData(fineData);

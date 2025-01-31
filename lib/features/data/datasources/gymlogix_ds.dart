@@ -22,6 +22,7 @@ class RemoteDs {
       headers: headers,
       body: body,
     );
+    print(response.statusCode);
     print(response.body);
 
     if (response.statusCode == 200) {
@@ -29,9 +30,25 @@ class RemoteDs {
 
       return obj;
     } else {
-      throw Exception('Faild to login');
+      // Map<String, dynamic> responseData = jsonDecode(response.body);
+      // print("body ${responseData["reason"]}");
+      final reason = handleError(response.body);
+      if (reason.isEmpty) {
+        throw Exception("unable to reach now.");
+      }
+      throw Exception(reason);
     }
   }
+
+String handleError(String jsonString){
+ Map<String, dynamic> responseData = jsonDecode(jsonString);
+     // print("body ${responseData["reason"]}");
+      final reason = responseData["reason"] as String;
+      if (reason.isEmpty) {
+       return "unable to reach now.";
+      }
+      return  reason;
+}
 
   Future<String> getToken() async {
     const FlutterSecureStorage secureStorage = FlutterSecureStorage();
@@ -57,7 +74,7 @@ class RemoteDs {
       headers: headers,
       // body: body,
     );
-    print(response.body);
+   // print(response.body);
 
     if (response.statusCode == 200) {
       final obj = LoginModel.fromJson(jsonDecode(response.body));

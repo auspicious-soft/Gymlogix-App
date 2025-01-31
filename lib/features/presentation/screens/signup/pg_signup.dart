@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gymlogix/Services/api_service.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
@@ -12,18 +13,18 @@ import 'package:gymlogix/app_settings/constants/app_const.dart';
 import 'package:gymlogix/app_settings/constants/common_button.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:async';
-
 import 'package:gymlogix/features/presentation/screens/bestprograms/pg_bestprograms.dart';
 import 'package:gymlogix/features/presentation/screens/login/pg_login.dart';
 
-class PgSignup extends StatefulWidget {
+class PgSignup extends ConsumerStatefulWidget {
   const PgSignup({super.key});
-
-  @override
-  State<PgSignup> createState() => _PgSignupState();
+ @override
+  ConsumerState<ConsumerStatefulWidget> createState() {
+  return _PgSignupState();
+  }
 }
 
-class _PgSignupState extends State<PgSignup> {
+class _PgSignupState extends ConsumerState<PgSignup> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();

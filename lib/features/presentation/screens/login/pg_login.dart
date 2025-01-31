@@ -9,34 +9,57 @@ import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
 import 'package:flutter/gestures.dart';
 import 'package:gymlogix/app_settings/constants/common_button.dart';
+import 'package:gymlogix/extensions/extend_string.dart';
 import 'package:gymlogix/features/data/datasources/user_storage.dart';
 import 'package:gymlogix/features/data/models/login_model.dart';
 import 'package:gymlogix/features/presentation/providers/login_provider.dart';
 import 'package:gymlogix/features/presentation/screens/dashboard/pg_dashboard.dart';
 import 'package:gymlogix/features/presentation/screens/forgotpassword/pg_forgot_pass.dart';
 
-class PgLogin extends ConsumerWidget {
+
+class PgLogin extends ConsumerStatefulWidget {
   const PgLogin({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final formState = ref.watch(loginFormNotifierProvider);
-    final loginState = ref.watch(stateLoginNotifierProvider);
+  PgLoginState createState() => PgLoginState();
+}
+
+class PgLoginState extends ConsumerState<PgLogin> {
+  @override
+  void initState() {
+    super.initState();
+    // "ref" can be used in all life-cycles of a StatefulWidget.
+   // ref.read(counterProvider);
+  }
+
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+//   @override
+//   Widget build(BuildContext context) {
+// return Container();
+
+
+//   }}
+// class PgLogin extends ConsumerWidget {
+//   const PgLogin({super.key});
+
+  @override
+  Widget build(BuildContext context ) {
+
+    final formState = ref.watch(loginFormNotifierProvider);
+    final loginState = ref.watch(stateLoginNotifierProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (loginState.hasError) {
         Flushbar(
           message: loginState.error.toString(),
           duration: const Duration(seconds: 2),
           flushbarStyle: FlushbarStyle.GROUNDED,
-        ).show(context);
-
+        ).show(context); 
         // Reset the error state to avoid showing the error repeatedly
-        ref.read(stateLoginNotifierProvider.notifier);
+       // ref.read(stateLoginNotifierProvider.notifier);
       }
     });
-
+//print("Widget call ${emailController.text}");
     return Scaffold(
       body: Stack(
         children: [
@@ -46,6 +69,8 @@ class PgLogin extends ConsumerWidget {
               fit: BoxFit.cover,
             ),
           ),
+
+
           loginState.maybeWhen(
               loading: () => const Center(
                       child: CircularProgressIndicator(
@@ -139,6 +164,7 @@ class PgLogin extends ConsumerWidget {
                                       fontFamily: AppConst.fontFamily,
                                       fontWeight: FontWeight.w500),
                                   keyboardType: TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.next,
                                 ),
                               ),
                               const SizedBox(height: 20),
@@ -182,11 +208,12 @@ class PgLogin extends ConsumerWidget {
                                 txt: "Login",
                                 context: context,
                                 onPressed: () {
+                                  
                                   final isValid = !formState.isEmailError &&
                                       !formState.isPasswordError &&
                                       emailController.text.isNotEmpty &&
-                                      passwordController.text.isNotEmpty;
-
+                                      passwordController.text.isNotEmpty && !emailController.text.isInvalidEmail();
+print(isValid);
                                   if (isValid) {
                                     ref
                                         .read(
@@ -292,6 +319,15 @@ class PgLogin extends ConsumerWidget {
                       ),
                     ),
                   )),
+      Positioned(
+  top: 60,
+  left: 20,
+  child:IconButton(onPressed: (){
+    
+    Navigator.pop(context);
+  }, icon: const Icon(Icons.arrow_back_rounded,color: Colors.white,size: 50,)),
+),
+      
         ],
       ),
     );
