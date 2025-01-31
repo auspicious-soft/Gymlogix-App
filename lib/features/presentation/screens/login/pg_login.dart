@@ -15,6 +15,7 @@ import 'package:gymlogix/features/data/models/login_model.dart';
 import 'package:gymlogix/features/presentation/providers/login_provider.dart';
 import 'package:gymlogix/features/presentation/screens/dashboard/pg_dashboard.dart';
 import 'package:gymlogix/features/presentation/screens/forgotpassword/pg_forgot_pass.dart';
+import 'package:gymlogix/features/presentation/screens/signup/pg_signup.dart';
 
 
 class PgLogin extends ConsumerStatefulWidget {
@@ -257,7 +258,30 @@ print(isValid);
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 30),
+                             // const SizedBox(height: 30),
+                              Row
+                              
+                              (
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                Label(txt: "Already have an account?", type: TextTypes.f_12_500),
+
+                                TextButton(onPressed: (){
+                      
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => const PgSignup()),
+          // );
+            Navigator.of(context).pushAndRemoveUntil(
+  MaterialPageRoute(
+    builder: (context) => const  PgSignup(),
+  ),
+  (Route<dynamic> route) => false,
+);
+        
+        
+                                }, child: Label(txt: "SignUp", type: TextTypes.f_20_700,forceColor: Colors.red,))
+                              ],),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -319,14 +343,14 @@ print(isValid);
                       ),
                     ),
                   )),
-      Positioned(
-  top: 60,
-  left: 20,
-  child:IconButton(onPressed: (){
+//       Positioned(
+//   top: 60,
+//   left: 20,
+//   child:IconButton(onPressed: (){
     
-    Navigator.pop(context);
-  }, icon: const Icon(Icons.arrow_back_rounded,color: Colors.white,size: 50,)),
-),
+//     Navigator.pop(context);
+//   }, icon: const Icon(Icons.arrow_back_rounded,color: Colors.white,size: 50,)),
+// ),
       
         ],
       ),

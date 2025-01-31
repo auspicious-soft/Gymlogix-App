@@ -17,10 +17,10 @@ class RemoteDsImpl implements RemoteRepo {
       if (loginData != null) {
         return Right(loginData);
       }
-    //  print("return from here");
+      //  print("return from here");
       return Left(SomeSpecificError("Unable to fetch"));
     } catch (error) {
-       print("return ok from here ${error.toString()}");
+      print("return ok from here ${error.toString()}");
       return Left(SomeSpecificError(error.toString()));
     }
   }
@@ -35,6 +35,20 @@ class RemoteDsImpl implements RemoteRepo {
       return Left(SomeSpecificError("Unable to fetch"));
     } catch (error) {
       return Left(SomeSpecificError(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> signupNormal(Map<String, dynamic> body) async {
+    try {
+      final pData = await remoteDataSource.signupNormal(body);
+
+      if (pData) {
+        return const Right(true);
+      }
+      return Left(SomeSpecificError(pData));
+    } catch (e) {
+      return Left(SomeSpecificError(e.toString()));
     }
   }
 }
