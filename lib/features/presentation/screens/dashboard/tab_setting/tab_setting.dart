@@ -3,7 +3,9 @@ import 'package:gymlogix/Widgets/common_header.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
+import 'package:gymlogix/features/data/datasources/user_storage.dart';
 import 'package:gymlogix/features/presentation/screens/about/pg_about.dart';
+import 'package:gymlogix/features/presentation/screens/login/pg_login.dart';
 import 'package:gymlogix/features/presentation/screens/membership/pg_membership.dart';
 import 'package:gymlogix/features/presentation/screens/notificationsound/pg_notificationsound.dart';
 import 'package:gymlogix/features/presentation/screens/workoutsetting/workoutsetting.dart';
@@ -358,6 +360,48 @@ class _TabSettingState extends State<TabSetting> {
                         ],
                       ),
                     )
+                ,
+                 const SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () => {
+                        UserStorage.con.deleteToken(),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PgLogin()),
+                        )
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(children: [
+                            SizedBox(
+                              height: 18,
+                              width: 18,
+                              child: Image.asset(
+                                AppAssets.logo,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            const Label(
+                              txt: "Logout?",
+                              type: TextTypes.f_18_500,
+                            ),
+                          ]),
+                          const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 10,
+                            color: AppColors.privacyTxt,
+                          ),
+                        ],
+                      ),
+                    )
+                
                   ]),
                 ),
                 const SizedBox(height: 20),

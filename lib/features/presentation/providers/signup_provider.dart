@@ -119,13 +119,33 @@ class SignUpNotifier extends StateNotifier<AsyncValue<bool?>> {
     final String signupAt = DateTime.now().toUtc().toIso8601String();
     final String platform = Platform.isIOS ? "iOS" : "Android";
 
+/**
+ * google_id:9876543210 
+gender:male
+first_name:Avtar
+last_name:Singh
+age": 25
+locale:en_US
+email:avtar5@yopmail.com
+password:Avtar@123
+password_confirmation:Avtar@123
+pic_URL:https://example.com/pic.jpg
+signup_at:2024-12-24T10:00:00Z
+signin_at:2024-12-24T10:05:00Z
+platform: web
+signup_type:email
+device_id: "device123
+is_premium: true
+premium_expiration": null,
+user_type: ""
+ */
     final Map<String, dynamic> requestBody = {
-      "google_id": "",
+      "google_id": "12131",
       "gender": "male",
       "first_name": firstName,
       "last_name": lastName,
       "age": 25,
-      "locale": "en_US",
+      
       "email": email,
       "password": pass,
       "password_confirmation": pass,
@@ -137,7 +157,8 @@ class SignUpNotifier extends StateNotifier<AsyncValue<bool?>> {
       "device_id": "1234",
       "is_premium": true,
       "premium_expiration": null,
-      "user_type": ""
+      "user_type": "",
+      "locale": "en_US",
     };
 
 

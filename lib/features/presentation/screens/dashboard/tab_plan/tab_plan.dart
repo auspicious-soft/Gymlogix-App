@@ -10,14 +10,18 @@ import 'package:gymlogix/app_settings/constants/common_button.dart';
 import 'package:gymlogix/features/presentation/screens/CreateExerciseStack/createexercise/pg_createexericse.dart';
 import 'package:gymlogix/features/presentation/screens/CreateFoodStack/CreateFood/pg_createfood.dart';
 import 'package:gymlogix/features/presentation/screens/customplans/pg_customplans.dart';
+import 'package:gymlogix/features/presentation/screens/dashboard/tab_plan/widges_methods.dart';
 
-class TabPlan extends StatefulWidget {
+import '../../../providers/plans_provider.dart';
+import 'build_plan_list.dart';
+
+class TabPlan extends ConsumerStatefulWidget {
   const TabPlan({super.key});
   @override
-  State<TabPlan> createState() => _TabPlanState();
+  ConsumerState<TabPlan> createState() => _TabPlanState();
 }
 
-class _TabPlanState extends State<TabPlan> {
+class _TabPlanState extends ConsumerState<TabPlan> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String _selectGender = "Male";
   int workoutPlanItemCount = 3;
@@ -44,6 +48,9 @@ class _TabPlanState extends State<TabPlan> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero).then((_) {
+      ref.read(stateGetPlanProvider.notifier).getPlanData(context: context);
+    });
   }
 
   @override
@@ -59,6 +66,8 @@ class _TabPlanState extends State<TabPlan> {
       key: _scaffoldKey,
       backgroundColor: AppColors.whiteColor,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Fixed Header
           Container(
@@ -119,25 +128,51 @@ class _TabPlanState extends State<TabPlan> {
               ],
             ),
           ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  buildWorkoutHeader("Workout plan", (dsd) {}),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const BuildPlanList(),
+                  Container(
+                    height: 100,
+                    color: Colors.blue,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 100,
+                    color: Colors.blue,
+                  )
+                ],
+              ),
+            ),
+          )
 
           // Scrollable Content
-          Flexible(
-            child: CustomScrollView(
-              slivers: [
-                _buildSectionHeader("Workout plan"),
-                // if (workoutplan == true) _buildPlanList(workoutPlanItemCount),
-                if (workoutplan == true) BuildPlanList(),
-                if (workoutplan == true)
-                  _buildLoadMoreButton(() => _loadMoreItems('workout')),
-                _buildSectionHeader("Food plans"),
-                // if (foodplan == true) _buildPlanList(foodPlanItemCount),
-                if (foodplan == true)
-                  _buildLoadMoreButton(() => _loadMoreItems('food')),
-                _buildSectionHeader("Active plan"),
-                if (activeplan == true) _activePlanList(activePlanItemCount),
-              ],
-            ),
-          ),
+          // CustomScrollView(
+          //   slivers: [
+          //     _buildSectionHeader("Workout plan"),
+          //     // if (workoutplan == true) _buildPlanList(workoutPlanItemCount),
+          //     if (workoutplan == true)      BuildPlanList(),
+          //     if (workoutplan == true)
+          //       _buildLoadMoreButton(() => _loadMoreItems('workout')),
+
+          //     _buildSectionHeader("Food plans"),
+          //     // if (foodplan == true) _buildPlanList(foodPlanItemCount),
+          //     if (foodplan == true)
+          //       _buildLoadMoreButton(() => _loadMoreItems('food')),
+          //     _buildSectionHeader("Active plan"),
+          //     if (activeplan == true) _activePlanList(activePlanItemCount),
+          //   ],
+          // ),
         ],
       ),
       floatingActionButton: SpeedDial(
@@ -1043,7 +1078,7 @@ class _TabPlanState extends State<TabPlan> {
                         height: 25,
                       ),
                       Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -1139,63 +1174,4 @@ class _TabPlanState extends State<TabPlan> {
   }
 }
 
-class BuildPlanList extends ConsumerWidget {
-  const BuildPlanList({super.key});
-// int itemCount;
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // Widget _buildPlanList(int itemCount) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-        return GestureDetector(
-            onTap: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PgCustomplans()),
-                  )
-                },
-            child: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 103,
-                      width: 100,
-                      child: Image.asset(
-                        AppAssets.program,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    const Expanded(
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Label(
-                              txt: "Upper Lower program",
-                              type: TextTypes.f_12_700,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Label(
-                            txt:
-                                "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
-                            type: TextTypes.f_10_500,
-                            forceColor: AppColors.privacyTxt,
-                          ),
-                          SizedBox(height: 5),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-              ],
-            ));
-      }, childCount: 2),
-    );
-  }
-}
+ 

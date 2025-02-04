@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/Models/model_view.dart';
 
 import 'package:gymlogix/Widgets/common_header.dart';
@@ -6,7 +7,9 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
+import 'package:gymlogix/features/data/datasources/user_storage.dart';
 import 'package:gymlogix/features/presentation/screens/LogWorkoutStart/pg_logworkoutstart.dart';
+import 'package:gymlogix/features/presentation/screens/dashboard/tab_home/widget_allplans.dart';
 import 'package:gymlogix/features/presentation/screens/logfoodstart/pg_logfoodstart.dart';
 import 'package:gymlogix/features/presentation/screens/logmeal/pg_logmeal.dart';
 import 'package:gymlogix/features/presentation/screens/logmeasurement/pg_logmeasurement.dart';
@@ -15,14 +18,17 @@ import 'package:gymlogix/features/presentation/screens/viewfood/pg_viewfood.dart
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-class TabHome extends StatefulWidget {
+import '../../../../data/datasources/network_error.dart';
+import '../../../providers/plans_provider.dart';
+
+class TabHome extends ConsumerStatefulWidget {
   final ModelView homeScreenData;
-  const TabHome({Key? key, required this.homeScreenData});
+  const TabHome({super.key, required this.homeScreenData});
   @override
-  State<TabHome> createState() => _TabHomeState();
+  ConsumerState<TabHome> createState() => _TabHomeState();
 }
 
-class _TabHomeState extends State<TabHome> {
+class _TabHomeState extends ConsumerState<TabHome> {
   late ModelView _homeScreenData;
   late final ValueNotifier<DateTime> _selectedDay;
   late final CalendarFormat _calendarFormat;
@@ -33,6 +39,21 @@ class _TabHomeState extends State<TabHome> {
     _selectedDay = ValueNotifier(DateTime.now());
     _calendarFormat = CalendarFormat.month;
     _homeScreenData = widget.homeScreenData;
+   getToken();
+  // Future.delayed(Duration.zero).then(
+  //     (_)   {
+
+  //     ref.read(stateGetPlanProvider.notifier).getPlanData( context: context);
+  //     }
+  //   );
+  }
+  void  getPlans()async {
+
+  }
+  void  getToken()async{
+  final tkn = await  UserStorage.con.getToken();
+  
+  print(tkn);
   }
 
   @override
@@ -75,6 +96,8 @@ class _TabHomeState extends State<TabHome> {
 
   @override
   Widget build(BuildContext context) {
+    
+    final stateGetPlan = ref.watch(stateGetPlanProvider);
     final exerciseData = _homeScreenData.schedule.isNotEmpty
         ? _homeScreenData.schedule[0].content.exercises
         : [];
@@ -84,11 +107,13 @@ class _TabHomeState extends State<TabHome> {
       body: Column(
         children: [
           commonHeader(context, "HOME"),
+         
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                   //Calendar
                   Container(
                     color: AppColors.primaryColor,
                     padding: const EdgeInsets.all(18),
@@ -160,117 +185,141 @@ class _TabHomeState extends State<TabHome> {
                       ),
                     ),
                   ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: exerciseData.length,
-                    itemBuilder: (context, index) {
-                      final exercise = exerciseData[index];
-                      final finishAt = exercise.finishAt;
-                      final formattedDate = _formatDate(finishAt);
-                      return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Label(
-                                  txt: formattedDate,
-                                  type: TextTypes.f_16_700,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              GestureDetector(
-                                  onTap: () => {
-                                        if (index == 0)
-                                          {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const PgLogmeal()),
-                                            )
-                                          }
-                                        else if (index == 1)
-                                          {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const PgViewfood()),
-                                            )
-                                          }
-                                        else if (index == 2)
-                                          {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const PgLogmeasurement()),
-                                            )
-                                          }
-                                      },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15),
-                                    height: 84,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.whiteColor,
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                          color: AppColors.lightGrey),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          height: 55,
-                                          width: 55,
-                                          child: Image.asset(
-                                            AppAssets.dumbel,
-                                            fit: BoxFit.contain,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Label(
-                                              txt: formattedDate,
-                                              type: TextTypes.f_13_700,
-                                              forceColor: AppColors.grey,
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.5,
-                                              child: Label(
-                                                txt: exercise.comments,
-                                                type: TextTypes.f_15_700,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                            ],
-                          ));
-                    },
-                  ),
+                
+                 //Task list
+stateGetPlan.maybeWhen(
+  orElse: () {
+                        return CircularProgressIndicator();},
+  data: (data) {
+    print("Gymdata ${data}");
+return Text(data == null ? "failed": "success");//WidgetAllplans(plans: data!.data);
+},
+  loading: () {
+ return CircularProgressIndicator();
+},
+error: (error, stackTrace) {
+return  Center(
+  child: ElevatedButton(onPressed: (){
+  
+    }, child: Text(error.toString())),
+);
+},
+
+)
+
+                  // ListView.builder(
+                  //   shrinkWrap: true,
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  //   itemCount: exerciseData.length,
+                  //   itemBuilder: (context, index) {
+                  //     final exercise = exerciseData[index];
+                  //     final finishAt = exercise.finishAt;
+                  //     final formattedDate = _formatDate(finishAt);
+                  //     return Padding(
+                  //         padding: const EdgeInsets.symmetric(horizontal: 15),
+                  //         child: Column(
+                  //           children: [
+                  //             const SizedBox(
+                  //               height: 15,
+                  //             ),
+                  //             Align(
+                  //               alignment: Alignment.topLeft,
+                  //               child: Label(
+                  //                 txt: formattedDate,
+                  //                 type: TextTypes.f_16_700,
+                  //               ),
+                  //             ),
+                  //             const SizedBox(
+                  //               height: 15,
+                  //             ),
+                  //             GestureDetector(
+                  //                 onTap: () => {
+                  //                       if (index == 0)
+                  //                         {
+                  //                           Navigator.push(
+                  //                             context,
+                  //                             MaterialPageRoute(
+                  //                                 builder: (context) =>
+                  //                                     const PgLogmeal()),
+                  //                           )
+                  //                         }
+                  //                       else if (index == 1)
+                  //                         {
+                  //                           Navigator.push(
+                  //                             context,
+                  //                             MaterialPageRoute(
+                  //                                 builder: (context) =>
+                  //                                     const PgViewfood()),
+                  //                           )
+                  //                         }
+                  //                       else if (index == 2)
+                  //                         {
+                  //                           Navigator.push(
+                  //                             context,
+                  //                             MaterialPageRoute(
+                  //                                 builder: (context) =>
+                  //                                     const PgLogmeasurement()),
+                  //                           )
+                  //                         }
+                  //                     },
+                  //                 child: Container(
+                  //                   padding: const EdgeInsets.symmetric(
+                  //                       horizontal: 15),
+                  //                   height: 84,
+                  //                   decoration: BoxDecoration(
+                  //                     color: AppColors.whiteColor,
+                  //                     borderRadius: BorderRadius.circular(15),
+                  //                     border: Border.all(
+                  //                         color: AppColors.lightGrey),
+                  //                   ),
+                  //                   child: Row(
+                  //                     children: [
+                  //                       SizedBox(
+                  //                         height: 55,
+                  //                         width: 55,
+                  //                         child: Image.asset(
+                  //                           AppAssets.dumbel,
+                  //                           fit: BoxFit.contain,
+                  //                         ),
+                  //                       ),
+                  //                       const SizedBox(
+                  //                         width: 15,
+                  //                       ),
+                  //                       Column(
+                  //                         mainAxisAlignment:
+                  //                             MainAxisAlignment.center,
+                  //                         crossAxisAlignment:
+                  //                             CrossAxisAlignment.start,
+                  //                         children: [
+                  //                           Label(
+                  //                             txt: formattedDate,
+                  //                             type: TextTypes.f_13_700,
+                  //                             forceColor: AppColors.grey,
+                  //                           ),
+                  //                           const SizedBox(
+                  //                             height: 5,
+                  //                           ),
+                  //                           SizedBox(
+                  //                             width: MediaQuery.of(context)
+                  //                                     .size
+                  //                                     .width /
+                  //                                 1.5,
+                  //                             child: Label(
+                  //                               txt: exercise.comments,
+                  //                               type: TextTypes.f_15_700,
+                  //                             ),
+                  //                           )
+                  //                         ],
+                  //                       ),
+                  //                     ],
+                  //                   ),
+                  //                 )),
+                  //           ],
+                  //         ));
+                  //   },
+                  // ),
+                
+                
                 ],
               ),
             ),

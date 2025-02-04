@@ -1,12 +1,15 @@
 import 'package:dartz/dartz.dart';
+import 'package:gymlogix/features/data/models/gymplan_model.dart';
 
 import 'package:gymlogix/features/data/models/login_model.dart';
 import 'package:gymlogix/features/data/models/plan_model.dart';
 
+import '../../data/datasources/network_error.dart';
+
 abstract class RemoteRepo {
   Future<Either<Failure, LoginModel>> login(String email, String pass);
   Future<Either<Failure, PlanModel>> getPlans(String token);
-
+Future<Either<NetworkAPIStatus,List<GymPlanData>>> getAllPlans();
   Future<Either<Failure, bool>> signupNormal(Map<String, dynamic> body);
 }
 

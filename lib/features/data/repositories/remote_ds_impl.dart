@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:dartz/dartz.dart';
 import 'package:gymlogix/features/data/datasources/gymlogix_ds.dart';
+import 'package:gymlogix/features/data/models/gymplan_model.dart';
 import 'package:gymlogix/features/data/models/login_model.dart';
 import 'package:gymlogix/features/data/models/plan_model.dart';
 import 'package:gymlogix/features/domain/repositories/remote_repo.dart';
+
+import '../datasources/network_error.dart';
 
 class RemoteDsImpl implements RemoteRepo {
   final RemoteDs remoteDataSource;
@@ -49,6 +54,24 @@ class RemoteDsImpl implements RemoteRepo {
       return Left(SomeSpecificError(pData));
     } catch (e) {
       return Left(SomeSpecificError(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<NetworkAPIStatus, List<GymPlanData>>> getAllPlans() async  {
+   try {
+      final planData = await remoteDataSource.getAllPlans();
+      print(planData.status);
+       print("Here data count ${planData.data.length}");
+      if (planData.status == NetworkAPIStatus.success) {
+        print("true");
+       final asData = planData.data as List<GymPlanData>;
+        return Right(asData);
+      }
+      return Left(planData.status);
+    } catch (error) {
+      print("crash ${error.toString()}");
+     return const Left(NetworkAPIStatus.failedToProcess);
     }
   }
 }

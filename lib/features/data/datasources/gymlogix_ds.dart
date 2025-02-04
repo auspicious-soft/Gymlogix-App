@@ -1,9 +1,18 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gymlogix/app_settings/constants/app_config.dart';
+import 'package:gymlogix/features/data/datasources/network_error.dart';
+import 'package:gymlogix/features/data/models/gymplan_model.dart';
 import 'package:gymlogix/features/data/models/login_model.dart';
 import 'package:http/http.dart' as http;
+class APIResult {
+  final NetworkAPIStatus status;
+  final dynamic data;
 
+  APIResult(this.status, this.data);
+}
 class RemoteDs {
   RemoteDs();
   // ignore: non_constant_identifier_names
@@ -54,6 +63,8 @@ class RemoteDs {
   Future<String> getToken() async {
     const FlutterSecureStorage secureStorage = FlutterSecureStorage();
     final fullToken = await secureStorage.read(key: 'token');
+    print(fullToken);
+    
     return fullToken ?? "";
   }
 
@@ -87,15 +98,22 @@ class RemoteDs {
   }
 
   Future<dynamic> signupNormal(Map<String, dynamic> body) async {
-    print("Params ${body}");
-    final response = await http.post(
-      Uri.parse('$_BASE_URL${AppConfig.signUp}'),
-      // headers: headers,
-      // body: body,
+    final encoded = jsonEncode(body);
+    final uri = Uri.parse('$_BASE_URL${AppConfig.signUp}');
+    print(uri);
+    print("Params are ${encoded}");
+    final response = await http.post(uri,
+       
+        headers: {
+      'Content-Type': 'application/json',
+        // If needed
+    },
+       body: encoded,
     );
     if (response.statusCode == 200) {
+      print(response.body);
       Map<String, dynamic> dataHealth = jsonDecode(response.body);
-
+print(dataHealth);
       if (dataHealth["status"] == 1) {
         // print("error in ok ${handleError(response.body)}");
         throw Exception(handleError(response.body));
@@ -111,4 +129,51 @@ class RemoteDs {
       throw Exception(res);
     }
   }
+
+   Future<APIResult>  getAllPlans()   async  {
+    print("***********************************");
+        final token = await getToken();
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    };
+     try {
+      final  url = "${_BASE_URL}plan/get";
+       final response = await http.get(
+      Uri.parse(url),
+      headers: headers,
+      // body: body,
+    );
+
+    print(url);
+     print(response.statusCode);
+
+    if (response.statusCode == 200) {
+      final obj = GymPlanModel.fromJson(jsonDecode(response.body));
+print("Count ${obj.data?.length}");
+      return APIResult(NetworkAPIStatus.success, obj.data);
+    }
+     else {
+       return APIResult(NetworkAPIStatus.failedToProcess, null);
+     // throw Exception(NetworkErrors.failedToProcess);
+    }
+     }  on SocketException {
+       return APIResult(NetworkAPIStatus.internetFailed, null);
+     // throw Exception(NetworkErrors.internetFailed);
+    //print("Network Error: No Internet connection or server is unreachable.");
+  } on HttpException {
+     return APIResult(NetworkAPIStatus.failedToProcess, null);
+   // throw Exception(NetworkErrors.failedToProcess);
+  } on FormatException {
+     return APIResult(NetworkAPIStatus.failedToProcess, null);
+    // throw Exception(NetworkErrors.failedToProcess);
+  } on TimeoutException {
+     return APIResult(NetworkAPIStatus.retryRequest, null);
+  //  throw Exception(NetworkErrors.retryRequest);
+  } catch (e) {
+    print("Unexpected Error: $e");
+     return APIResult(NetworkAPIStatus.failedToProcess, null);
+  }
+   }
+   
 }
