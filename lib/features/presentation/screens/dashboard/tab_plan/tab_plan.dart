@@ -1,3 +1,4 @@
+ 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
@@ -6,10 +7,12 @@ import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
 import 'package:gymlogix/app_settings/constants/common_button.dart';
+import 'package:gymlogix/features/presentation/providers/foodplan_provider.dart';
 
 import 'package:gymlogix/features/presentation/screens/CreateExerciseStack/createexercise/pg_createexericse.dart';
 import 'package:gymlogix/features/presentation/screens/CreateFoodStack/CreateFood/pg_createfood.dart';
 import 'package:gymlogix/features/presentation/screens/customplans/pg_customplans.dart';
+import 'package:gymlogix/features/presentation/screens/dashboard/tab_plan/food_plan_list.dart';
 import 'package:gymlogix/features/presentation/screens/dashboard/tab_plan/widges_methods.dart';
 
 import '../../../providers/plans_provider.dart';
@@ -44,13 +47,41 @@ class _TabPlanState extends ConsumerState<TabPlan> {
   bool foodplan = true;
   bool activeplan = true;
   bool autoNextExercise = false;
+void loadWorkOutPlans(){
 
+ ref.read(stateGetPlanProvider.notifier).getPlanData(); 
+}
+void loadFoodPlans()async{
+  
+  Future.delayed(Duration.zero).then((_) {
+      
+     if (!context.mounted) return;
+    //  ref.read(stateGetPlanProvider.notifier).getPlanData(context: context);
+   
+    ref.read(stateFoodPlanProvider.notifier).getFoodPlansData();
+    });
+ 
+//ref.read(stateFoodPlanProvider.notifier).getFoodPlansData(context: context);
+}
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero).then((_) {
-      ref.read(stateGetPlanProvider.notifier).getPlanData(context: context);
-    });
+//loadFoodPlans();
+    // Fetching data when the widget is initialized
+   //  Future.microtask(() => ref.invalidate(dataProvider));
+    // Future.microtask(() => ref.read(dataProvider.notifier).refresh());
+    
+   // loadWorkOutPlans();
+   // loadFoodPlans();
+    // Using FutureProvider to load data
+  
+ 
+    // Future.delayed(Duration.zero).then((_) {
+      
+    //  if (!context.mounted) return;
+    //   ref.read(stateGetPlanProvider.notifier).getPlanData(context: context);
+    //   ref.read(stateFoodPlanProvider.notifier).getFoodPlansData(context: context);
+    // });
   }
 
   @override
@@ -62,6 +93,11 @@ class _TabPlanState extends ConsumerState<TabPlan> {
   Widget build(
     BuildContext context,
   ) {
+ // final foodPlans =  ref.read(foodPlanProvider).getFoodPlans();
+   
+    //  ref.read(stateFoodPlanProvider.notifier).getFoodPlansData();
+    final stateFoodPlan = ref.watch(stateFoodPlanProvider);
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: AppColors.whiteColor,
@@ -140,17 +176,44 @@ class _TabPlanState extends ConsumerState<TabPlan> {
                     height: 10,
                   ),
                   const BuildPlanList(),
-                  Container(
-                    height: 100,
-                    color: Colors.blue,
+                  
+                  buildWorkoutHeader("Food plan", (dsd) {}),
+                  const SizedBox(
+                    height: 10,
                   ),
+                  stateFoodPlan.maybeWhen(orElse: (){
+                    return Text("hii");
+                  },
+                  data: (data) { 
+                    print("Data ${data}");
+                    return data == null ? CircularProgressIndicator() : BuildFoodPlanList(foodplanList: data);
+                  
+                  },
+                  error: (error, stackTrace) {
+                     return Text("Error");
+                  },
+                  loading: () {
+                      return CircularProgressIndicator();
+                  },
+                  ),
+                  // stateFoodPlan.when(
+                    
+                  //   data: (data) {
+                  //   print("Data ${data}");
+                  //   return data == null ? CircularProgressIndicator() : BuildFoodPlanList(foodplanList: data);
+                  // },
+                  // loading: () {
+                  //   return CircularProgressIndicator();
+                  // },
+                  // error: (error, stackTrace) {
+                  //   return Text("Error");
+                  // }
+                  // ,),
+                  
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    height: 100,
-                    color: Colors.blue,
-                  )
+                  
                 ],
               ),
             ),

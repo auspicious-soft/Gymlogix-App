@@ -39,21 +39,20 @@ class _TabHomeState extends ConsumerState<TabHome> {
     _selectedDay = ValueNotifier(DateTime.now());
     _calendarFormat = CalendarFormat.month;
     _homeScreenData = widget.homeScreenData;
-   getToken();
-  // Future.delayed(Duration.zero).then(
-  //     (_)   {
+    getToken();
+    // Future.delayed(Duration.zero).then(
+    //     (_)   {
 
-  //     ref.read(stateGetPlanProvider.notifier).getPlanData( context: context);
-  //     }
-  //   );
+    //     ref.read(stateGetPlanProvider.notifier).getPlanData( context: context);
+    //     }
+    //   );
   }
-  void  getPlans()async {
 
-  }
-  void  getToken()async{
-  final tkn = await  UserStorage.con.getToken();
-  
-  print(tkn);
+  void getPlans() async {}
+  void getToken() async {
+    final tkn = await UserStorage.con.getToken();
+
+    print(tkn);
   }
 
   @override
@@ -96,8 +95,8 @@ class _TabHomeState extends ConsumerState<TabHome> {
 
   @override
   Widget build(BuildContext context) {
-    
-    final stateGetPlan = ref.watch(stateGetPlanProvider);
+    //final stateGetPlans = ref.watch(stateGetPlanProvider);
+
     final exerciseData = _homeScreenData.schedule.isNotEmpty
         ? _homeScreenData.schedule[0].content.exercises
         : [];
@@ -107,13 +106,12 @@ class _TabHomeState extends ConsumerState<TabHome> {
       body: Column(
         children: [
           commonHeader(context, "HOME"),
-         
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   //Calendar
+                  //Calendar
                   Container(
                     color: AppColors.primaryColor,
                     padding: const EdgeInsets.all(18),
@@ -185,141 +183,140 @@ class _TabHomeState extends ConsumerState<TabHome> {
                       ),
                     ),
                   ),
-                
-                 //Task list
-stateGetPlan.maybeWhen(
-  orElse: () {
-                        return CircularProgressIndicator();},
-  data: (data) {
-    print("Gymdata ${data}");
-return Text(data == null ? "failed": "success");//WidgetAllplans(plans: data!.data);
-},
-  loading: () {
- return CircularProgressIndicator();
-},
-error: (error, stackTrace) {
-return  Center(
-  child: ElevatedButton(onPressed: (){
-  
-    }, child: Text(error.toString())),
-);
-},
 
-)
-
-                  // ListView.builder(
-                  //   shrinkWrap: true,
-                  //   physics: const NeverScrollableScrollPhysics(),
-                  //   itemCount: exerciseData.length,
-                  //   itemBuilder: (context, index) {
-                  //     final exercise = exerciseData[index];
-                  //     final finishAt = exercise.finishAt;
-                  //     final formattedDate = _formatDate(finishAt);
-                  //     return Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 15),
-                  //         child: Column(
-                  //           children: [
-                  //             const SizedBox(
-                  //               height: 15,
-                  //             ),
-                  //             Align(
-                  //               alignment: Alignment.topLeft,
-                  //               child: Label(
-                  //                 txt: formattedDate,
-                  //                 type: TextTypes.f_16_700,
-                  //               ),
-                  //             ),
-                  //             const SizedBox(
-                  //               height: 15,
-                  //             ),
-                  //             GestureDetector(
-                  //                 onTap: () => {
-                  //                       if (index == 0)
-                  //                         {
-                  //                           Navigator.push(
-                  //                             context,
-                  //                             MaterialPageRoute(
-                  //                                 builder: (context) =>
-                  //                                     const PgLogmeal()),
-                  //                           )
-                  //                         }
-                  //                       else if (index == 1)
-                  //                         {
-                  //                           Navigator.push(
-                  //                             context,
-                  //                             MaterialPageRoute(
-                  //                                 builder: (context) =>
-                  //                                     const PgViewfood()),
-                  //                           )
-                  //                         }
-                  //                       else if (index == 2)
-                  //                         {
-                  //                           Navigator.push(
-                  //                             context,
-                  //                             MaterialPageRoute(
-                  //                                 builder: (context) =>
-                  //                                     const PgLogmeasurement()),
-                  //                           )
-                  //                         }
-                  //                     },
-                  //                 child: Container(
-                  //                   padding: const EdgeInsets.symmetric(
-                  //                       horizontal: 15),
-                  //                   height: 84,
-                  //                   decoration: BoxDecoration(
-                  //                     color: AppColors.whiteColor,
-                  //                     borderRadius: BorderRadius.circular(15),
-                  //                     border: Border.all(
-                  //                         color: AppColors.lightGrey),
-                  //                   ),
-                  //                   child: Row(
-                  //                     children: [
-                  //                       SizedBox(
-                  //                         height: 55,
-                  //                         width: 55,
-                  //                         child: Image.asset(
-                  //                           AppAssets.dumbel,
-                  //                           fit: BoxFit.contain,
-                  //                         ),
-                  //                       ),
-                  //                       const SizedBox(
-                  //                         width: 15,
-                  //                       ),
-                  //                       Column(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.center,
-                  //                         crossAxisAlignment:
-                  //                             CrossAxisAlignment.start,
-                  //                         children: [
-                  //                           Label(
-                  //                             txt: formattedDate,
-                  //                             type: TextTypes.f_13_700,
-                  //                             forceColor: AppColors.grey,
-                  //                           ),
-                  //                           const SizedBox(
-                  //                             height: 5,
-                  //                           ),
-                  //                           SizedBox(
-                  //                             width: MediaQuery.of(context)
-                  //                                     .size
-                  //                                     .width /
-                  //                                 1.5,
-                  //                             child: Label(
-                  //                               txt: exercise.comments,
-                  //                               type: TextTypes.f_15_700,
-                  //                             ),
-                  //                           )
-                  //                         ],
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 )),
-                  //           ],
-                  //         ));
+                  //Task list
+                  // stateGetPlans.maybeWhen(
+                  //   orElse: () {
+                  //     return CircularProgressIndicator();
                   //   },
-                  // ),
-                
-                
+                  //   data: (data) {
+                  //     print("Gymdata ${data}");
+                  //     return Text(data == null
+                  //         ? "failed"
+                  //         : "success"); //WidgetAllplans(plans: data!.data);
+                  //   },
+                  //   loading: () {
+                  //     return CircularProgressIndicator();
+                  //   },
+                  //   error: (error, stackTrace) {
+                  //     return Center(
+                  //       child: ElevatedButton(
+                  //           onPressed: () {}, child: Text(error.toString())),
+                  //     );
+                  //   },
+                  // )
+
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: exerciseData.length,
+                    itemBuilder: (context, index) {
+                      final exercise = exerciseData[index];
+                      final finishAt = exercise.finishAt;
+                      final formattedDate = _formatDate(finishAt);
+                      return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Label(
+                                  txt: formattedDate,
+                                  type: TextTypes.f_16_700,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              GestureDetector(
+                                  onTap: () => {
+                                        if (index == 0)
+                                          {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PgLogmeal()),
+                                            )
+                                          }
+                                        else if (index == 1)
+                                          {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PgViewfood()),
+                                            )
+                                          }
+                                        else if (index == 2)
+                                          {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PgLogmeasurement()),
+                                            )
+                                          }
+                                      },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15),
+                                    height: 84,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.whiteColor,
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(
+                                          color: AppColors.lightGrey),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 55,
+                                          width: 55,
+                                          child: Image.asset(
+                                            AppAssets.dumbel,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 15,
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Label(
+                                              txt: formattedDate,
+                                              type: TextTypes.f_13_700,
+                                              forceColor: AppColors.grey,
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.5,
+                                              child: Label(
+                                                txt: exercise.comments,
+                                                type: TextTypes.f_15_700,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                            ],
+                          ));
+                    },
+                  ),
                 ],
               ),
             ),

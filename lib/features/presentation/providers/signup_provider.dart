@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/constants/app_config.dart';
 import 'package:gymlogix/features/data/models/login_model.dart'; 
-import 'package:gymlogix/features/presentation/providers/remote_repo_provider.dart';
+import 'package:gymlogix/features/ds_providers/remote_repo_provider.dart';
 
 import '../../domain/usecases/signup_usecase.dart';
 

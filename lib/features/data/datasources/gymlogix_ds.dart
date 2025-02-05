@@ -7,12 +7,16 @@ import 'package:gymlogix/features/data/datasources/network_error.dart';
 import 'package:gymlogix/features/data/models/gymplan_model.dart';
 import 'package:gymlogix/features/data/models/login_model.dart';
 import 'package:http/http.dart' as http;
+
+import 'api_endpoints.dart';
+
 class APIResult {
   final NetworkAPIStatus status;
   final dynamic data;
 
   APIResult(this.status, this.data);
 }
+
 class RemoteDs {
   RemoteDs();
   // ignore: non_constant_identifier_names
@@ -64,7 +68,7 @@ class RemoteDs {
     const FlutterSecureStorage secureStorage = FlutterSecureStorage();
     final fullToken = await secureStorage.read(key: 'token');
     print(fullToken);
-    
+
     return fullToken ?? "";
   }
 
@@ -102,18 +106,18 @@ class RemoteDs {
     final uri = Uri.parse('$_BASE_URL${AppConfig.signUp}');
     print(uri);
     print("Params are ${encoded}");
-    final response = await http.post(uri,
-       
-        headers: {
-      'Content-Type': 'application/json',
+    final response = await http.post(
+      uri,
+      headers: {
+        'Content-Type': 'application/json',
         // If needed
-    },
-       body: encoded,
+      },
+      body: encoded,
     );
     if (response.statusCode == 200) {
       print(response.body);
       Map<String, dynamic> dataHealth = jsonDecode(response.body);
-print(dataHealth);
+      print(dataHealth);
       if (dataHealth["status"] == 1) {
         // print("error in ok ${handleError(response.body)}");
         throw Exception(handleError(response.body));
@@ -130,50 +134,98 @@ print(dataHealth);
     }
   }
 
-   Future<APIResult>  getAllPlans()   async  {
+  Future<APIResult> getAllPlans() async {
     print("***********************************");
-        final token = await getToken();
+    final token = await getToken();
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': token
     };
-     try {
-      final  url = "${_BASE_URL}plan/get";
-       final response = await http.get(
-      Uri.parse(url),
-      headers: headers,
-      // body: body,
-    );
+    try {
+      final url = "${_BASE_URL}plan/get";
+      final response = await http.get(
+        Uri.parse(url),
+        headers: headers,
+        // body: body,
+      );
 
-    print(url);
-     print(response.statusCode);
+      print(url);
+      print(response.statusCode);
 
-    if (response.statusCode == 200) {
-      final obj = GymPlanModel.fromJson(jsonDecode(response.body));
-print("Count ${obj.data?.length}");
-      return APIResult(NetworkAPIStatus.success, obj.data);
+      if (response.statusCode == 200) {
+        final obj = GymPlanModel.fromJson(jsonDecode(response.body));
+        print("Count ${obj.data?.length}");
+        return APIResult(NetworkAPIStatus.success, obj.data);
+      } else {
+        return APIResult(NetworkAPIStatus.failedToProcess, null);
+        // throw Exception(NetworkErrors.failedToProcess);
+      }
+    } on SocketException {
+      return APIResult(NetworkAPIStatus.internetFailed, null);
+      // throw Exception(NetworkErrors.internetFailed);
+      //print("Network Error: No Internet connection or server is unreachable.");
+    } on HttpException {
+      return APIResult(NetworkAPIStatus.failedToProcess, null);
+      // throw Exception(NetworkErrors.failedToProcess);
+    } on FormatException {
+      return APIResult(NetworkAPIStatus.failedToProcess, null);
+      // throw Exception(NetworkErrors.failedToProcess);
+    } on TimeoutException {
+      return APIResult(NetworkAPIStatus.retryRequest, null);
+      //  throw Exception(NetworkErrors.retryRequest);
+    } catch (e) {
+      print("Unexpected Error: $e");
+      return APIResult(NetworkAPIStatus.failedToProcess, null);
     }
-     else {
-       return APIResult(NetworkAPIStatus.failedToProcess, null);
-     // throw Exception(NetworkErrors.failedToProcess);
-    }
-     }  on SocketException {
-       return APIResult(NetworkAPIStatus.internetFailed, null);
-     // throw Exception(NetworkErrors.internetFailed);
-    //print("Network Error: No Internet connection or server is unreachable.");
-  } on HttpException {
-     return APIResult(NetworkAPIStatus.failedToProcess, null);
-   // throw Exception(NetworkErrors.failedToProcess);
-  } on FormatException {
-     return APIResult(NetworkAPIStatus.failedToProcess, null);
-    // throw Exception(NetworkErrors.failedToProcess);
-  } on TimeoutException {
-     return APIResult(NetworkAPIStatus.retryRequest, null);
-  //  throw Exception(NetworkErrors.retryRequest);
-  } catch (e) {
-    print("Unexpected Error: $e");
-     return APIResult(NetworkAPIStatus.failedToProcess, null);
   }
-   }
-   
+
+  Future<APIResult> requestGetType({required ApiEndpoints endPoint}) async {
+    print("***********************************");
+    final token = await getToken();
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    };
+    try {
+      final url = "$_BASE_URL${endPoint.value}";
+      final response = await http.get(
+        Uri.parse(url),
+        headers: headers,
+        // body: body,
+      );
+
+      print(url);
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> dataHealth = jsonDecode(response.body);
+        print(dataHealth);
+        if (dataHealth["status"] == 1) {
+          // print("error in ok ${handleError(response.body)}");
+          return APIResult(NetworkAPIStatus.failedToProcess, null);
+        } else {
+          return APIResult(NetworkAPIStatus.success, dataHealth);
+        }
+      } else {
+        return APIResult(NetworkAPIStatus.failedToProcess, null);
+        // throw Exception(NetworkErrors.failedToProcess);
+      }
+    } on SocketException {
+      return APIResult(NetworkAPIStatus.internetFailed, null);
+      // throw Exception(NetworkErrors.internetFailed);
+      //print("Network Error: No Internet connection or server is unreachable.");
+    } on HttpException {
+      return APIResult(NetworkAPIStatus.failedToProcess, null);
+      // throw Exception(NetworkErrors.failedToProcess);
+    } on FormatException {
+      return APIResult(NetworkAPIStatus.failedToProcess, null);
+      // throw Exception(NetworkErrors.failedToProcess);
+    } on TimeoutException {
+      return APIResult(NetworkAPIStatus.retryRequest, null);
+      //  throw Exception(NetworkErrors.retryRequest);
+    } catch (e) {
+      print("Unexpected Error: $e");
+      return APIResult(NetworkAPIStatus.failedToProcess, null);
+    }
+  }
 }

@@ -1,8 +1,15 @@
-Task 4 Feb 25 Day 3
-1.Apply API on Home Screen
-2.
 
-Task 31 Jan 25
+Task 3 Feb 25 Day 3
+1.Apply Food plan API Done
+2. Create food 
+ 
+
+
+Task 2 Feb 25 Day 3
+1.Apply API on Home Screen pending 
+2.Apply api get workout done
+
+Task 1 Jan 25
 1.App Checking 
 2.Code understanding
 3.Fix login screen Done

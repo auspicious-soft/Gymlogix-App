@@ -4,6 +4,7 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/features/data/models/gymplan_model.dart';
+import 'package:gymlogix/features/presentation/providers/foodplan_provider.dart';
 import 'package:gymlogix/features/presentation/providers/plans_provider.dart';
 
 import '../../customplans/pg_customplans.dart';
@@ -17,6 +18,7 @@ class BuildPlanList extends ConsumerWidget {
 // int itemCount;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+   // ref.refresh(stateFoodPlanProvider.notifier).refresh
     final stateGetPlan = ref.watch(stateGetPlanProvider);
    // return SizedBox( height:40,child:  CircularProgressIndicator());
     // Widget _buildPlanList(int itemCount) {
@@ -31,7 +33,7 @@ error: (error, stackTrace) {
      Future.delayed(Duration.zero).then(
       (_)   {
 if (!context.mounted) return;
-      ref.read(stateGetPlanProvider.notifier).getPlanData( context: context);
+      ref.read(stateGetPlanProvider.notifier).getPlanData();
       }
      );
    }, child: const Text("Reload"));

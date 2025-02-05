@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/features/data/models/gymplan_model.dart'; 
 import 'package:gymlogix/features/domain/usecases/usecase_gym_plan.dart';
-import 'package:gymlogix/features/presentation/providers/remote_repo_provider.dart';
+import 'package:gymlogix/features/ds_providers/remote_repo_provider.dart';
 
 /// Provider for the login use case
 final getPlansProvider = Provider<UsecaseGymPlan>((ref) {
@@ -21,10 +21,11 @@ final stateGetPlanProvider =
 class GetPlanNotifier extends StateNotifier<AsyncValue<List<GymPlanData>?>> {
   final UsecaseGymPlan _planUseCase;
 
-  GetPlanNotifier(this._planUseCase) : super(const AsyncValue.data(null));
+  GetPlanNotifier(this._planUseCase) : super(const AsyncValue.loading()){
+    getPlanData();
+  }
 
-  Future<void> getPlanData(
-      {required BuildContext context}) async {
+  Future<void> getPlanData() async {
     try {
       state = const AsyncValue.loading();
       final data = await _planUseCase.getAllPlans();
@@ -49,4 +50,7 @@ class GetPlanNotifier extends StateNotifier<AsyncValue<List<GymPlanData>?>> {
           AsyncValue.error(e, StackTrace.fromString("Failed to execute list"));
     }
   }
+
+
+
 }

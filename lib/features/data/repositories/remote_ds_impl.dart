@@ -1,12 +1,13 @@
-import 'dart:math';
-
+ 
 import 'package:dartz/dartz.dart';
 import 'package:gymlogix/features/data/datasources/gymlogix_ds.dart';
+import 'package:gymlogix/features/data/models/get_food_plan_model.dart';
 import 'package:gymlogix/features/data/models/gymplan_model.dart';
 import 'package:gymlogix/features/data/models/login_model.dart';
 import 'package:gymlogix/features/data/models/plan_model.dart';
 import 'package:gymlogix/features/domain/repositories/remote_repo.dart';
 
+import '../datasources/api_endpoints.dart';
 import '../datasources/network_error.dart';
 
 class RemoteDsImpl implements RemoteRepo {
@@ -70,6 +71,22 @@ class RemoteDsImpl implements RemoteRepo {
       }
       return Left(planData.status);
     } catch (error) {
+      print("crash ${error.toString()}");
+     return const Left(NetworkAPIStatus.failedToProcess);
+    }
+  }
+
+  @override
+  Future<Either<NetworkAPIStatus, List<FoodPlanData>?>> getFoodPlans()async {
+    try {
+      final apiStatus = await remoteDataSource.requestGetType(endPoint: ApiEndpoints.getFoodPlan);
+     if (apiStatus.status == NetworkAPIStatus.success){
+      final obj =   GetFoodPlanModel.fromJson(apiStatus.data);
+      return Right(obj.foodPlanData);
+     }else{
+       return Left(apiStatus.status);
+     }
+      } catch (error) {
       print("crash ${error.toString()}");
      return const Left(NetworkAPIStatus.failedToProcess);
     }
