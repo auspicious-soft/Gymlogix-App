@@ -1,8 +1,15 @@
 
-Task 3 Feb 25 Day 3
+Project:Gymlogix
+Day: 4
+Date: Fri Feb 7
+Task  
 1.Apply Food plan API Done
-2. Create food 
+2. Added validation on food plan creation 
+3.Resetup goal chooser Design
+4.Fixed Add plan last screen
+5.Continue working on food creation program with get meal api and add plan api
  
+Project Completion %left:70% 
 
 
 Task 2 Feb 25 Day 3

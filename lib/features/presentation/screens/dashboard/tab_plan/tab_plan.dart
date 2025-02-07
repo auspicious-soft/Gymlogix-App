@@ -10,7 +10,7 @@ import 'package:gymlogix/app_settings/constants/common_button.dart';
 import 'package:gymlogix/features/presentation/providers/foodplan_provider.dart';
 
 import 'package:gymlogix/features/presentation/screens/CreateExerciseStack/createexercise/pg_createexericse.dart';
-import 'package:gymlogix/features/presentation/screens/CreateFoodStack/CreateFood/pg_createfood.dart';
+import 'package:gymlogix/features/food/presentation/CreateFood/pg_createfood.dart';
 import 'package:gymlogix/features/presentation/screens/customplans/pg_customplans.dart';
 import 'package:gymlogix/features/presentation/screens/dashboard/tab_plan/food_plan_list.dart';
 import 'package:gymlogix/features/presentation/screens/dashboard/tab_plan/widges_methods.dart';

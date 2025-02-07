@@ -1,0 +1,15 @@
+lib/
+│── core/                  # Common utilities (optional)
+│── features/
+│   ├── explore/           # Feature module
+│   │   ├── data/          # Data layer
+│   │   │   ├── models/    # Data models
+│   │   │   ├── repositories/
+│   │   ├── domain/        # Domain layer
+│   │   │   ├── entities/  # Core app models
+│   │   │   ├── usecases/  # Business logic
+│   │   ├── presentation/  # UI
+│   │   │   ├── screens/
+│   │   │   ├── providers/ # Riverpod state
+│   │   │   ├── widgets/
+│── main.dart
