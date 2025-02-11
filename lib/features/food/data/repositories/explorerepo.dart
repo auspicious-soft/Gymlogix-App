@@ -1,8 +1,6 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:dartz/dartz.dart'; 
 import 'package:gymlogix/features/data/datasources/network_error.dart';
-import 'package:gymlogix/features/food/data/models/explore_model.dart';
-import 'package:gymlogix/features/food/data/models/get_meal_model.dart';
+import 'package:gymlogix/features/food/data/models/explore_model.dart'; 
 import 'package:gymlogix/features/food/domain/entities/exploreitem.dart';
  
 class ExploreRepository {

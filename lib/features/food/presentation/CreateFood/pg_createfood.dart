@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
+import 'package:gymlogix/app_settings/constants/app_dim.dart';
 import 'package:gymlogix/app_settings/constants/common_button.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
 import 'package:gymlogix/features/food/presentation/CreateFood/pg_addfood.dart';
+
+import '../../../presentation/widgets/program_header.dart';
 
 class PgCreatefood extends ConsumerStatefulWidget {
   const PgCreatefood({super.key});
@@ -109,52 +112,10 @@ class _PgCreatefoodState extends ConsumerState<PgCreatefood> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                height: 176,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: AppColors.grey,
-                ),
-                child: Stack(
-                  children: [
-                    const Align(
-                        alignment: Alignment.topCenter,
-                        child: Label(
-                          txt: "Start building your program",
-                          type: TextTypes.f_20_900i,
-                          forceColor: AppColors.whiteColor,
-                        )),
-                    Positioned(
-                      bottom: 10,
-                      left: 10,
-                      right: 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Label(
-                            txt: "PPL Bulking",
-                            type: TextTypes.f_16_700,
-                            forceColor: AppColors.whiteColor,
-                          ),
-                          SizedBox(
-                            height: 35,
-                            width: 35,
-                            child: Image.asset(
-                              AppAssets.edit,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
+
+          const  ProgramHeader(topTitle: "Start building your program",subTitleLeft: "PPL Bulking",),
+               
+             padVertical(60),
               if (activeIndex == 0)
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -205,7 +166,7 @@ class _PgCreatefoodState extends ConsumerState<PgCreatefood> {
                     height: 200,
                     child: GridView.builder(
                         itemCount: goals.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2, // 2 items per row
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
@@ -247,7 +208,7 @@ class _PgCreatefoodState extends ConsumerState<PgCreatefood> {
                                       overflow: TextOverflow.clip,
                                       maxLines: 2,
                                       softWrap: true,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.black, fontSize: 16),
                                       textAlign: TextAlign.center,
                                     ),
@@ -274,7 +235,7 @@ class _PgCreatefoodState extends ConsumerState<PgCreatefood> {
                           type: TextTypes.f_14_700,
                           forceColor: AppColors.primaryColor,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -290,7 +251,7 @@ class _PgCreatefoodState extends ConsumerState<PgCreatefood> {
                           child: TextField(
                             controller: fieldProgramDetail,
                             textAlignVertical: TextAlignVertical.top,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText:
                                   "A detail let you remind the value of your plan.",
                               contentPadding: EdgeInsets.symmetric(
@@ -299,7 +260,7 @@ class _PgCreatefoodState extends ConsumerState<PgCreatefood> {
                               ),
                               border: InputBorder.none,
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black,
@@ -332,7 +293,7 @@ class _PgCreatefoodState extends ConsumerState<PgCreatefood> {
                           child: TextField(
                             controller: fieldProgramTip,
                             textAlignVertical: TextAlignVertical.top,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText:
                                   "Let's see how you write a tip for your program",
                               contentPadding: EdgeInsets.symmetric(
@@ -341,7 +302,7 @@ class _PgCreatefoodState extends ConsumerState<PgCreatefood> {
                               ),
                               border: InputBorder.none,
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black,
@@ -353,7 +314,7 @@ class _PgCreatefoodState extends ConsumerState<PgCreatefood> {
                       ],
                     )),
 
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
               commonButton(
                 txt: "Next",
                 context: context,

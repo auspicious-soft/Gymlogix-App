@@ -6,6 +6,8 @@ import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:gymlogix/features/food/presentation/CreateFood/widget_meal_list.dart';
+import 'package:gymlogix/features/presentation/widgets/program_header.dart';
 import 'package:gymlogix/features/presentation/providers/explore_provider.dart';
 import 'package:gymlogix/features/presentation/providers/foodplan_provider.dart';
 import 'package:gymlogix/features/presentation/screens/CreateExerciseStack/AddExerciseDays/pg_add_ex_days.dart';
@@ -13,33 +15,37 @@ import 'package:gymlogix/features/presentation/screens/CreateExerciseStack/AddEx
 import '../../../../app_settings/constants/common_button.dart';
 import '../providers/food_source_provider.dart';
 import '../providers/get_meal_provider.dart';
+import '../widgets/meal_loader.dart';
 
-class  DataForPageAddPlan {
- final  String planName;
+class DataForPageAddPlan {
+  final String planName;
   final String goalName;
   final String planDescription;
   final String planTip;
 
-  DataForPageAddPlan({required this.planName, required this.goalName, required this.planDescription, required this.planTip});
-
+  DataForPageAddPlan(
+      {required this.planName,
+      required this.goalName,
+      required this.planDescription,
+      required this.planTip});
 }
 
 class PgAddfood extends ConsumerStatefulWidget {
   final DataForPageAddPlan planData;
-  const PgAddfood({super.key,required this.planData});
+  const PgAddfood({super.key, required this.planData});
 
   @override
   ConsumerState<PgAddfood> createState() => _PgAddfoodState();
 }
 
 class _PgAddfoodState extends ConsumerState<PgAddfood> {
-
+  List<int> text = [];
   @override
   Widget build(BuildContext context) {
-   //ref.watch(stateExploreItemProvider.notifier);
-   final stateFoodPlan = ref.watch(stateMealItemProvider);
+    //ref.watch(stateMealItemProvider.notifier);
+    // final stateMeals = ref.watch(stateMealItemProvider);
 
-  //  final exploreAsync = ref.watch(exploreItemsProvider);
+    //  final exploreAsync = ref.watch(exploreItemsProvider);
     return Scaffold(
         backgroundColor: AppColors.whiteColor,
         body: SingleChildScrollView(
@@ -94,57 +100,26 @@ class _PgAddfoodState extends ConsumerState<PgAddfood> {
               ],
             ),
           ),
-          Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-stateFoodPlan.when(
-        data: (items) => ListView.builder(
-          shrinkWrap: true,
-          itemCount: items!.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(items[index].name ?? "No name"),
-            );
-          },
-        ),
-        loading: () => Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(child: Text("Error: $err")),
-      ),
-    
 
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              height: 176,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: AppColors.grey,
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: 10,
-                    left: 10,
-                    right: 10,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Label(
-                          txt: "PPL Bulking",
-                          type: TextTypes.f_16_700,
-                          forceColor: AppColors.whiteColor,
-                        ),
-                        SizedBox(
-                          height: 35,
-                          width: 35,
-                          child: Image.asset(
-                            AppAssets.edit,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          // WidgetMealList(),
+          Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+// stateFoodPlan.when(
+//         data: (items) => ListView.builder(
+//           shrinkWrap: true,
+//           itemCount: items!.length,
+//           itemBuilder: (context, index) {
+//             return ListTile(
+//               title: Text(items[index].name ?? "No name"),
+//             );
+//           },
+//         ),
+//         loading: () => Center(child: CircularProgressIndicator()),
+//         error: (err, stack) => Center(child: Text("Error: $err")),
+//       ),
+
+            ///HERE
+
+          const  ProgramHeader(topTitle: "",subTitleLeft: "PPL Bulking",),
             const SizedBox(
               height: 40,
             ),
@@ -153,6 +128,38 @@ stateFoodPlan.when(
               type: TextTypes.f_14_700,
               forceColor: AppColors.primaryColor,
             ),
+            Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: WidgetMealList(
+                          title: "My Meal 1", subTitle: "10 Foods"),
+                    ),
+
+        //     stateMeals.when(data: (data) {
+        //       return Padding(
+        //         padding: const EdgeInsets.all(8.0),
+        //         child: Column(children: [
+        //            for(var i = 0; i< data!.length; i++)
+        // ...[
+        //   Padding(
+        //               padding: const EdgeInsets.all(8.0),
+        //               child: WidgetMealList(
+        //                   title: data[i].name ?? "", subTitle: "10 Foods"),
+        //             )
+        // ],
+                   
+                    
+                    
+        //         ]));
+        //     },
+        //     error: (error, stackTrace) {
+        //       return SizedBox();
+        //     },
+        //     loading: () {
+        //     return MealLoader();
+        //     },
+        //     ),
+           
+//add workout or meal
             Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 60),
@@ -197,6 +204,27 @@ stateFoodPlan.when(
                         ),
                       ),
                     ))),
+            //end
+
+            Row(
+              children: [
+                Spacer(),
+                SizedBox(
+                  width: 100,
+                  child: commonButton(
+                    txt: "Add",
+                    context: context,
+                    forceTextType: TextTypes.f_15_500,
+                    forceHeight: 40,
+                    onPressed: () => {},
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                )
+              ],
+            ),
+
             const SizedBox(
               height: 30,
             ),
@@ -205,7 +233,7 @@ stateFoodPlan.when(
               type: TextTypes.f_14_700,
               forceColor: AppColors.primaryColor,
             ),
-              Padding(
+            Padding(
                 padding: EdgeInsets.all(15),
                 child: Align(
                     alignment: Alignment.topLeft,
@@ -222,26 +250,22 @@ stateFoodPlan.when(
               type: TextTypes.f_14_700,
               forceColor: AppColors.primaryColor,
             ),
-              Padding(
+            Padding(
                 padding: EdgeInsets.all(15),
                 child: Align(
                     alignment: Alignment.topLeft,
                     child: (Label(
-                      txt:widget.planData.planTip,
+                      txt: widget.planData.planTip,
                       type: TextTypes.f_12_500i,
                       forceColor: AppColors.privacyTxt,
                     )))),
 
-                      commonButton(
-                txt: "Create",
-                context: context,
-                onPressed: () => {
-                   
-                    
-                      
-                },
-              ),
-              const SizedBox(
+            commonButton(
+              txt: "Create",
+              context: context,
+              onPressed: () => {},
+            ),
+            const SizedBox(
               height: 40,
             ),
           ])
@@ -249,7 +273,10 @@ stateFoodPlan.when(
   }
 
   void showMessage(String msg) {
-    var snackBar = SnackBar(content: Text(msg), duration: const Duration(seconds: 1),);
+    var snackBar = SnackBar(
+      content: Text(msg),
+      duration: const Duration(seconds: 1),
+    );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

@@ -11,6 +11,10 @@ class AppAssets {
   static String mechanic = "assets/images/mechanic.png";
   static String rice = "assets/images/rice.png";
   static String leg = "assets/images/leg.png";
+   static String mealRed = "assets/images/meal_red.png";
+    static String mealGreen = "assets/images/meal_green.png";
+     static String mealPink = "assets/images/meal_pink.png";
+      static String dots = "assets/images/dots.png";
   //Icons
   static String bellicon = "assets/icons/bellicon.png";
   static String edurance = "assets/icons/edurance.png";

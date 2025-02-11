@@ -3,9 +3,9 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 
 Widget commonButton(
-    {VoidCallback? onPressed, String? txt, context, Color? forceColor}) {
+    {VoidCallback? onPressed, String? txt, context, Color?  forceColor  ,TextTypes forceTextType = TextTypes.f_18_600 , double forceHeight =  60}) {
   return SizedBox(
-      height: 60,
+      height: forceHeight,
       width: MediaQuery.of(context).size.width / 1.1,
       child: ElevatedButton(
         onPressed: onPressed,
