@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/app_settings/constants/app_dim.dart';
-import 'package:gymlogix/features/global_widgets/common_button.dart';
-import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/AddWorkout/pg_addworkout.dart';
-import 'package:gymlogix/features/global_widgets/program_header.dart';
-import 'package:gymlogix/features/workout/presentation/widgets/plan_creators/plan_creator_step1.dart';
-import 'widgets/plan_creators/plac_creator_step6.dart';
-import 'widgets/plan_creators/plan_creator_step5.dart';
-import 'widgets/plan_creators/plan_creator_step2.dart';
-import 'widgets/plan_creators/plan_creator_step3.dart';
-import 'widgets/plan_creators/plan_creator_step4.dart';
-import 'widgets/plan_header.dart';
+import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
+import 'package:gymlogix/features/workout/presentation/add/pg_addworkout.dart';
+import 'package:gymlogix/features/helpers/global_widgets/program_header.dart';
+import 'package:gymlogix/features/workout/presentation/create/plan_creators/program_name_editor.dart';
+import 'plan_creators/Program_level_chooser.dart';
+import 'plan_creators/program_day_counter.dart';
+import 'plan_creators/program_goal_selector.dart';
+import 'plan_creators/program_locator.dart';
+import 'plan_creators/program_detail_editor.dart';
+import '../widgets/plan_header.dart';
 
 class PgCreateWorkout extends ConsumerStatefulWidget {
   const PgCreateWorkout({super.key});
@@ -40,18 +40,25 @@ class _StatePgCreateWorkout extends ConsumerState<PgCreateWorkout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerFloat,
-      floatingActionButton:   commonButton(
-                txt: "Next",
-                context: context,
-                onPressed: () => {togglePage()},
-              ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: commonButton(
+          txt: "Next",
+          context: context,
+          onPressed: () => {
+            togglePage(youWantForward: true)},
+        ),
         backgroundColor: AppColors.whiteColor,
         body: SingleChildScrollView(
             child: Column(children: [
-          const PlanPageHeader(
+          PlanPageHeader(
             title: "Customise workout plan",
+            onBackPress: () {
+              if (activeIndex == 1) {
+                Navigator.pop(context);
+              } else {
+                togglePage(youWantForward: false);
+              }
+            },
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,15 +68,15 @@ class _StatePgCreateWorkout extends ConsumerState<PgCreateWorkout> {
                   subTitleLeft: "PPL Bulking"),
               padVertical(60),
               if (activeIndex == 1)
-                PlanCreatorStep1(
+                ProgramNameEditor(
                     title: "Give a meaningful name for your program",
                     fieldController: nameController!),
-              if (activeIndex == 2) const PlanCreatorStep2(),
-              if (activeIndex == 3) const PlanCreatorStep3(),
-              if (activeIndex == 4) const PlanCreatorStep4(),
-              if (activeIndex == 5) const PlanCreatorStep5(),
-              if (activeIndex == 6) const PlanCreatorStep6(),
-             
+              if (activeIndex == 2) const ProgramGoalSelector(),
+              if (activeIndex == 3) const ProgramLocator(),
+              if (activeIndex == 4) const ProgramDetailEditor(),
+              if (activeIndex == 5) const ProgramDayCounter(),
+              if (activeIndex == 6) const ProgramLevelChooser(),
+
               // commonButton(
               //   txt: "Next",
               //   context: context,
@@ -80,8 +87,9 @@ class _StatePgCreateWorkout extends ConsumerState<PgCreateWorkout> {
           ),
         ])));
   }
+
 //Methods
-  void togglePage() {
+  void togglePage({required bool youWantForward}) {
     if (activeIndex == 6) {
       Navigator.push(
         context,
@@ -96,7 +104,7 @@ class _StatePgCreateWorkout extends ConsumerState<PgCreateWorkout> {
       }
       if (calculate) {
         setState(() {
-          activeIndex = activeIndex + 1;
+          activeIndex = youWantForward ? activeIndex + 1 : activeIndex - 1;
         });
       }
     }

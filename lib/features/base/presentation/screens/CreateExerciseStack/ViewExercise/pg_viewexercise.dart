@@ -3,7 +3,7 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 
-import 'package:gymlogix/features/global_widgets/common_button.dart';
+import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
 
 class PgViewexercise extends StatefulWidget {
   const PgViewexercise({super.key});

@@ -4,7 +4,7 @@ import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
 import 'package:gymlogix/app_settings/constants/app_dim.dart';
-import 'package:gymlogix/features/global_widgets/common_button.dart';
+import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
 import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/createexercise/pg_createexericse.dart';
 import 'package:gymlogix/features/base/presentation/screens/SpecificExercise/pg_specific_exercise.dart';
 import 'package:gymlogix/features/base/presentation/screens/WorkoutResult/pg_workoutresult.dart';

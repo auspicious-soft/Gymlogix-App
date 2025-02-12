@@ -5,7 +5,7 @@ import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/features/base/data/datasources/user_storage.dart';
 import 'package:gymlogix/features/base/presentation/screens/about/pg_about.dart';
-import 'package:gymlogix/features/base/presentation/screens/login/pg_login.dart';
+import 'package:gymlogix/features/authorisatiion/login/pg_login.dart';
 import 'package:gymlogix/features/base/presentation/screens/membership/pg_membership.dart';
 import 'package:gymlogix/features/base/presentation/screens/notificationsound/pg_notificationsound.dart';
 import 'package:gymlogix/features/base/presentation/screens/workoutsetting/workoutsetting.dart';

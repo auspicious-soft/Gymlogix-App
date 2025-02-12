@@ -5,8 +5,8 @@ import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import '../../../../../app_settings/components/label.dart';
 import '../../../../../app_settings/constants/app_assets.dart';
  
-class PlanCreatorStep3 extends StatelessWidget {
-  const PlanCreatorStep3({
+class ProgramLocator extends StatelessWidget {
+  const ProgramLocator({
     super.key,
   });
 

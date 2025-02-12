@@ -3,8 +3,8 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 
-class PlanCreatorStep6 extends StatelessWidget {
-  const PlanCreatorStep6({
+class ProgramLevelChooser extends StatelessWidget {
+  const ProgramLevelChooser({
     super.key,
   });
 

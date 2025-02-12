@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/AddExerciseDays/pg_add_ex_days.dart';
+import 'package:gymlogix/features/helpers/global_widgets/pos_background.dart';
+import 'package:gymlogix/features/workout/presentation/widgets/plan_header.dart';
 
-class PgAddworkout extends StatefulWidget {
+class PgAddworkout extends ConsumerStatefulWidget {
   const PgAddworkout({super.key});
 
   @override
-  State<PgAddworkout> createState() => _PgAddworkoutState();
+  ConsumerState<PgAddworkout> createState() => _PgAddworkoutState();
 }
 
-class _PgAddworkoutState extends State<PgAddworkout> {
+class _PgAddworkoutState extends ConsumerState<PgAddworkout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,46 +29,45 @@ class _PgAddworkoutState extends State<PgAddworkout> {
             ),
             child: Stack(
               children: [
-                Positioned.fill(
-                  child: Image.asset(
-                    AppAssets.background,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 60, left: 15, right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () => {Navigator.pop(context)},
-                            child: const Icon(
-                              Icons.arrow_back_ios,
-                              size: 20,
-                              color: AppColors.whiteColor,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          const Label(
-                            txt: "Custom workout plan",
-                            type: TextTypes.f_16_700,
-                            forceColor: AppColors.whiteColor,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 35,
-                        width: 35,
-                        child: Image.asset(
-                          AppAssets.bellicon,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+               const PositionBackGround(),
+               PlanPageHeader(title: "Custom workout plan", onBackPress: (){
+                Navigator.pop(context);
+               })
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 60, left: 15, right: 15),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Row(
+                //         children: [
+                //           GestureDetector(
+                //             onTap: () => {Navigator.pop(context)},
+                //             child: const Icon(
+                //               Icons.arrow_back_ios,
+                //               size: 20,
+                //               color: AppColors.whiteColor,
+                //             ),
+                //           ),
+                //           const SizedBox(width: 10),
+                //           const Label(
+                //             txt: "Custom workout plan",
+                //             type: TextTypes.f_16_700,
+                //             forceColor: AppColors.whiteColor,
+                //           ),
+                //         ],
+                //       ),
+                //       SizedBox(
+                //         height: 35,
+                //         width: 35,
+                //         child: Image.asset(
+                //           AppAssets.bellicon,
+                //           fit: BoxFit.contain,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+            
               ],
             ),
           ),

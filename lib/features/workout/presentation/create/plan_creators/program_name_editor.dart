@@ -6,11 +6,11 @@ import  'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
  
 
-class PlanCreatorStep1 extends StatelessWidget {
+class ProgramNameEditor extends StatelessWidget {
   
   final String title;
   final TextEditingController fieldController;
-  const PlanCreatorStep1({
+  const ProgramNameEditor({
     super.key,
     required this.title,
     required this.fieldController

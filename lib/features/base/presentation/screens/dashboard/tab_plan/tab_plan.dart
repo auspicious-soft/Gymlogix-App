@@ -6,7 +6,7 @@ import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
-import 'package:gymlogix/features/global_widgets/common_button.dart';
+import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
 import 'package:gymlogix/features/base/presentation/providers/foodplan_provider.dart';
 
 import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/createexercise/pg_createexericse.dart';
@@ -14,7 +14,7 @@ import 'package:gymlogix/features/food/presentation/CreateFood/pg_createfood.dar
 import 'package:gymlogix/features/base/presentation/screens/customplans/pg_customplans.dart';
 import 'package:gymlogix/features/base/presentation/screens/dashboard/tab_plan/food_plan_list.dart';
 import 'package:gymlogix/features/base/presentation/screens/dashboard/tab_plan/widges_methods.dart';
-import 'package:gymlogix/features/workout/presentation/pg_create_workout.dart';
+import 'package:gymlogix/features/workout/presentation/create/pg_create_workout.dart';
 
 import '../../../providers/plans_provider.dart';
 import 'build_plan_list.dart';

@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/features/base/data/models/get_food_plan_model.dart';
 import 'package:gymlogix/features/base/data/repositories/remote_ds_impl.dart';
 import 'package:gymlogix/features/base/domain/usecases/usecase_gym_plan.dart';
-import 'package:gymlogix/features/ds_providers/remote_repo_provider.dart';
+import 'package:gymlogix/features/base/presentation/providers/remote_repo_provider.dart';
 import 'package:riverpod/src/async_notifier.dart';
 
 import '../../data/datasources/network_error.dart';

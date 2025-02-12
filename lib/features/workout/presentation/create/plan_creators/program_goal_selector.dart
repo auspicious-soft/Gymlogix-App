@@ -2,15 +2,14 @@
  
 import 'package:flutter/material.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
-import  'package:gymlogix/app_settings/constants/app_colors.dart';
-import 'package:gymlogix/app_settings/constants/app_const.dart';
+import  'package:gymlogix/app_settings/constants/app_colors.dart'; 
 
 import '../../../../../app_settings/constants/app_assets.dart';
  
 
-class PlanCreatorStep2 extends StatelessWidget {
+class ProgramGoalSelector extends StatelessWidget {
     
-  const PlanCreatorStep2({
+  const ProgramGoalSelector({
     super.key, 
   });
 

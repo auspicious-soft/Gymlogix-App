@@ -4,8 +4,8 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 
-class PlanCreatorStep5 extends StatelessWidget {
-  const PlanCreatorStep5({
+class ProgramDayCounter extends StatelessWidget {
+  const ProgramDayCounter({
     super.key,
   });
 

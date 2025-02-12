@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/features/base/data/models/login_model.dart';
 import 'package:gymlogix/features/base/domain/usecases/usecase_login.dart';
-import 'package:gymlogix/features/ds_providers/remote_repo_provider.dart';
+import 'package:gymlogix/features/base/presentation/providers/remote_repo_provider.dart';
 
 /// Provider for the login use case
 final loginProvider = Provider<UsecaseLogin>((ref) {

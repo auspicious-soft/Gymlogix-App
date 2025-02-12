@@ -5,9 +5,11 @@ import 'package:gymlogix/app_settings/constants/app_colors.dart';
 
 class PlanPageHeader extends StatelessWidget {
   final String title;
+  final Function onBackPress;
   const PlanPageHeader({
     super.key,
-    required this.title
+    required this.title,
+    required this.onBackPress
   });
 
   @override
@@ -33,7 +35,7 @@ class PlanPageHeader extends StatelessWidget {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () => {Navigator.pop(context)},
+                      onTap: () => onBackPress(),
                       child: const Icon(
                         Icons.arrow_back_ios,
                         size: 20,

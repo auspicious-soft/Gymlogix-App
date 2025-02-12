@@ -7,9 +7,9 @@ import 'package:gymlogix/app_settings/constants/app_config.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
 import 'package:flutter/gestures.dart';
 import 'package:gymlogix/app_settings/constants/app_dim.dart';
-import 'package:gymlogix/features/global_widgets/common_button.dart';
+import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:gymlogix/features/base/presentation/screens/login/pg_login.dart';
+import 'package:gymlogix/features/authorisatiion/login/pg_login.dart';
 
 class PgForgotPass extends StatefulWidget {
   const PgForgotPass({super.key});

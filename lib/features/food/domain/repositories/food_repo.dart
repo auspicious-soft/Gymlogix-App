@@ -12,3 +12,4 @@
 //    Future<Either<NetworkAPIStatus,List<MealData>?>> editMeal();
 //     Future<Either<NetworkAPIStatus,List<MealData>?>> testok();
 // }
+
