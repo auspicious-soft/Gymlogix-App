@@ -3,15 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/app_settings/constants/app_dim.dart';
 import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
-import 'package:gymlogix/features/workout/presentation/add/pg_addworkout.dart';
+import 'package:gymlogix/features/workout/presentation/create_workout/add/pg_addworkout.dart';
 import 'package:gymlogix/features/helpers/global_widgets/program_header.dart';
-import 'package:gymlogix/features/workout/presentation/create/plan_creators/program_name_editor.dart';
+import 'package:gymlogix/features/workout/presentation/create_workout/create/plan_creators/program_name_editor.dart';
 import 'plan_creators/Program_level_chooser.dart';
 import 'plan_creators/program_day_counter.dart';
 import 'plan_creators/program_goal_selector.dart';
 import 'plan_creators/program_locator.dart';
 import 'plan_creators/program_detail_editor.dart';
-import '../widgets/plan_header.dart';
+import '../../widgets/plan_header.dart';
 
 class PgCreateWorkout extends ConsumerStatefulWidget {
   const PgCreateWorkout({super.key});

@@ -9,12 +9,12 @@ import 'package:gymlogix/app_settings/constants/app_const.dart';
 import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
 import 'package:gymlogix/features/base/presentation/providers/foodplan_provider.dart';
 
-import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/createexercise/pg_createexericse.dart';
+import 'package:gymlogix/features/workout/presentation/create_exercise/createexercise/pg_createexericse.dart';
 import 'package:gymlogix/features/food/presentation/CreateFood/pg_createfood.dart';
 import 'package:gymlogix/features/base/presentation/screens/customplans/pg_customplans.dart';
 import 'package:gymlogix/features/base/presentation/screens/dashboard/tab_plan/food_plan_list.dart';
 import 'package:gymlogix/features/base/presentation/screens/dashboard/tab_plan/widges_methods.dart';
-import 'package:gymlogix/features/workout/presentation/create/pg_create_workout.dart';
+import 'package:gymlogix/features/workout/presentation/create_workout/create/pg_create_workout.dart';
 
 import '../../../providers/plans_provider.dart';
 import 'build_plan_list.dart';

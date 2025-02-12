@@ -2,14 +2,46 @@
 
 Project:Gymlogix
 Day: 5
-Date: Fri Feb 12
+Date: Wed 12 Feb
 Task  
-1.Apply Food plan API Done
-2. Added validation on food plan creation 
-3.Resetup goal chooser Design
-4.Fixed Add plan last screen
-5.Continue working on food creation program with get meal api and add plan api
+1.Cleaned up login page
+2.Cleaned up signup page 
+3.Readded workout plan UI
+4.Fixed widgets in workout plan
+5.Working on workout plan creation API 
  
+ Exercise API
+ http://18.232.174.110/api/exercise/get
+
+http://18.232.174.110/api/exercise/create_update?data
+
+{
+"data": { 
+  "exercise_id": 1002,   //include if u wanna update
+  "name": "Deadlift",
+  "description": "The deadlift is a compound exercise that targets the posterior chain, including the hamstrings, glutes, and lower back.",
+  "execution": "1. Stand with your feet hip-width apart, barbell over the middle of your feet.\n2. Bend at the hips and knees to grasp the bar with an overhand or mixed grip.\n3. Keep your back flat, chest up, and lift the bar by straightening your hips and knees.\n4. Lower the bar back to the ground with control.",
+  "preparation": "1. Load the barbell with the desired weight.\n2. Stand close to the bar with your feet under it.\n3. Engage your core and keep your spine neutral.",
+  "instruction": null,
+  "images_urls": [],
+  "movies_logo_url": "",
+  "movie_url": "",
+  "main_muscle": "Hamstrings",
+  "secondary_muscles": [
+    "Glutes",
+    " Lower Back"
+  ],
+  "mechanics": "Compound",
+  "difficulty": "Intermediate",
+  "type": "Strength",
+  "equipment": "Barbell",
+  "force": "Pull"  
+ 
+}
+
+}
+http://18.232.174.110/api/exercise/remove?exercise_id=1004
+
 Project Completion %left:70% 
 
 Project:Gymlogix

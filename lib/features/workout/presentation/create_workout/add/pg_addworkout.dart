@@ -4,7 +4,7 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/AddExerciseDays/pg_add_ex_days.dart';
+import 'package:gymlogix/features/workout/presentation/create_exercise/AddExerciseDays/pg_add_ex_days.dart';
 import 'package:gymlogix/features/helpers/global_widgets/pos_background.dart';
 import 'package:gymlogix/features/workout/presentation/widgets/plan_header.dart';
 
@@ -22,55 +22,24 @@ class _PgAddworkoutState extends ConsumerState<PgAddworkout> {
         backgroundColor: AppColors.whiteColor,
         body: SingleChildScrollView(
             child: Column(children: [
-          Container(
-            height: 120,
-            decoration: const BoxDecoration(
-              color: AppColors.primaryColor,
-            ),
-            child: Stack(
-              children: [
-               const PositionBackGround(),
                PlanPageHeader(title: "Custom workout plan", onBackPress: (){
                 Navigator.pop(context);
-               })
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 60, left: 15, right: 15),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Row(
-                //         children: [
-                //           GestureDetector(
-                //             onTap: () => {Navigator.pop(context)},
-                //             child: const Icon(
-                //               Icons.arrow_back_ios,
-                //               size: 20,
-                //               color: AppColors.whiteColor,
-                //             ),
-                //           ),
-                //           const SizedBox(width: 10),
-                //           const Label(
-                //             txt: "Custom workout plan",
-                //             type: TextTypes.f_16_700,
-                //             forceColor: AppColors.whiteColor,
-                //           ),
-                //         ],
-                //       ),
-                //       SizedBox(
-                //         height: 35,
-                //         width: 35,
-                //         child: Image.asset(
-                //           AppAssets.bellicon,
-                //           fit: BoxFit.contain,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-            
-              ],
-            ),
-          ),
+               }),
+          // Container(
+          //   height: 120,
+          //   decoration: const BoxDecoration(
+          //     color: AppColors.primaryColor,
+          //   ),
+          //   child: Stack(
+          //     children: [
+          //      const PositionBackGround(),
+          //      PlanPageHeader(title: "Custom workout plan", onBackPress: (){
+          //       Navigator.pop(context);
+          //      })
+              
+          //     ],
+          //   ),
+          // ),
           Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),

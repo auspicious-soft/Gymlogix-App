@@ -3,7 +3,7 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/AddExercise/pg_addexercise.dart';
+import 'package:gymlogix/features/workout/presentation/create_exercise/AddExercise/pg_addexercise.dart';
 
 class PgAddExDays extends StatefulWidget {
   const PgAddExDays({super.key});

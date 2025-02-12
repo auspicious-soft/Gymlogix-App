@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
-import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/AddNewExercise/pg_add_newex.dart';
-import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/ViewExercise/pg_viewexercise.dart';
+import 'package:gymlogix/features/workout/presentation/create_exercise/AddNewExercise/pg_add_newex.dart';
+import 'package:gymlogix/features/workout/presentation/create_exercise/ViewExercise/pg_viewexercise.dart';
 
-class PgAddexercise extends StatefulWidget {
+class PgAddexercise extends ConsumerStatefulWidget {
   const PgAddexercise({super.key});
 
   @override
-  State<PgAddexercise> createState() => _PgAddexerciseState();
+  ConsumerState<PgAddexercise> createState() => _PgAddexerciseState();
 }
 
-class _PgAddexerciseState extends State<PgAddexercise> {
+class _PgAddexerciseState extends ConsumerState<PgAddexercise> {
   int selectedIndex = 1;
   final List<String> percentages = ["0%", "10%", "20%"];
   bool meat = false;
