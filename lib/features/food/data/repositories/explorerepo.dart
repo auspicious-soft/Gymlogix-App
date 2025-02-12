@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart'; 
-import 'package:gymlogix/features/data/datasources/network_error.dart';
+import 'package:gymlogix/features/base/data/datasources/network_error.dart';
 import 'package:gymlogix/features/food/data/models/explore_model.dart'; 
 import 'package:gymlogix/features/food/domain/entities/exploreitem.dart';
  

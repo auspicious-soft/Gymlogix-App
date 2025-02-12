@@ -5,8 +5,8 @@ import 'package:gymlogix/features/food/data/repositories/food_repository.dart';
 import 'package:gymlogix/features/food/domain/repositories/domain_food_repo.dart';
 import 'package:gymlogix/features/food/domain/usecases/food_plan_usecase.dart';
  
-import '../../../data/datasources/gymlogix_ds.dart';
-import '../../../network/gymlogix_remote.dart';
+import '../../../base/data/datasources/gymlogix_ds.dart';
+import '../../../../network/gymlogix_remote.dart';
 import '../../data/food_ds.dart';
 import '../../domain/repositories/food_repo.dart';
 

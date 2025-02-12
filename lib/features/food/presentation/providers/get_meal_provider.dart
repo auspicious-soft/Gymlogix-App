@@ -1,7 +1,7 @@
 import 'dart:async';
  
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gymlogix/features/data/models/get_food_plan_model.dart';
+import 'package:gymlogix/features/base/data/models/get_food_plan_model.dart';
 import 'package:gymlogix/features/food/data/repositories/explorerepo.dart';
 import 'package:gymlogix/features/food/domain/entities/exploreitem.dart'; 
 import '../../domain/usecases/food_plan_usecase.dart';

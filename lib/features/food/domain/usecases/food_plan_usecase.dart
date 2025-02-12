@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:gymlogix/features/data/datasources/network_error.dart';
-import 'package:gymlogix/features/domain/repositories/remote_repo.dart';
+import 'package:gymlogix/features/base/data/datasources/network_error.dart';
+import 'package:gymlogix/features/base/domain/repositories/remote_repo.dart';
 import 'package:gymlogix/features/food/data/food_ds_impl.dart';
 import 'package:gymlogix/features/food/data/models/get_meal_model.dart';
 import 'package:gymlogix/features/food/data/repositories/food_repository.dart';
 import 'package:gymlogix/features/food/domain/repositories/domain_food_repo.dart';
-import 'package:gymlogix/features/network/gymlogix_remote.dart';
+import 'package:gymlogix/network/gymlogix_remote.dart';
 
 import '../../data/food_ds.dart';
 import '../repositories/food_repo.dart';

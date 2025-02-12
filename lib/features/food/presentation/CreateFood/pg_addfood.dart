@@ -7,12 +7,12 @@ import 'package:gymlogix/app_settings/constants/app_colors.dart';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:gymlogix/features/food/presentation/CreateFood/widget_meal_list.dart';
-import 'package:gymlogix/features/presentation/widgets/program_header.dart';
-import 'package:gymlogix/features/presentation/providers/explore_provider.dart';
-import 'package:gymlogix/features/presentation/providers/foodplan_provider.dart';
-import 'package:gymlogix/features/presentation/screens/CreateExerciseStack/AddExerciseDays/pg_add_ex_days.dart';
+import 'package:gymlogix/features/global_widgets/program_header.dart';
+import 'package:gymlogix/features/base/presentation/providers/explore_provider.dart';
+import 'package:gymlogix/features/base/presentation/providers/foodplan_provider.dart';
+import 'package:gymlogix/features/base/presentation/screens/CreateExerciseStack/AddExerciseDays/pg_add_ex_days.dart';
 
-import '../../../../app_settings/constants/common_button.dart';
+import '../../../global_widgets/common_button.dart';
 import '../providers/food_source_provider.dart';
 import '../providers/get_meal_provider.dart';
 import '../widgets/meal_loader.dart';

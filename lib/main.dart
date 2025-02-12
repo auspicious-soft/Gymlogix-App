@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:gymlogix/features/presentation/screens/splash.dart';
+import 'package:gymlogix/features/base/presentation/screens/splash.dart';
 
 void main() async {
   runApp(const ProviderScope(
