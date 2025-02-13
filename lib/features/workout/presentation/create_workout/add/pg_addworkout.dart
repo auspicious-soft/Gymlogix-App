@@ -4,8 +4,8 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:gymlogix/features/helpers/global_widgets/program_header.dart';
 import 'package:gymlogix/features/workout/presentation/create_exercise/AddExerciseDays/pg_add_ex_days.dart';
-import 'package:gymlogix/features/helpers/global_widgets/pos_background.dart';
 import 'package:gymlogix/features/workout/presentation/widgets/plan_header.dart';
 
 class PgAddworkout extends ConsumerStatefulWidget {
@@ -41,41 +41,44 @@ class _PgAddworkoutState extends ConsumerState<PgAddworkout> {
           //   ),
           // ),
           Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              height: 176,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: AppColors.grey,
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: 10,
-                    left: 10,
-                    right: 10,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Label(
-                          txt: "PPL Bulking",
-                          type: TextTypes.f_16_700,
-                          forceColor: AppColors.whiteColor,
-                        ),
-                        SizedBox(
-                          height: 35,
-                          width: 35,
-                          child: Image.asset(
-                            AppAssets.edit,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            ProgramHeader(topTitle: "", subTitleLeft: "PPL Bulking\nTue Aug 23, 2024")
+            ,
+            // Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            //   height: 176,
+            //   width: double.infinity,
+            //   decoration: const BoxDecoration(
+            //     color: AppColors.grey,
+            //   ),
+            //   child: Stack(
+            //     children: [
+            //       Positioned(
+            //         bottom: 10,
+            //         left: 10,
+            //         right: 10,
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           children: [
+            //             const Label(
+            //               txt: "PPL Bulking",
+            //               type: TextTypes.f_16_700,
+            //               forceColor: AppColors.whiteColor,
+            //             ),
+            //             SizedBox(
+            //               height: 35,
+            //               width: 35,
+            //               child: Image.asset(
+            //                 AppAssets.edit,
+            //                 fit: BoxFit.contain,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+         
             Padding(
               padding: const EdgeInsets.all(15),
               child: Row(

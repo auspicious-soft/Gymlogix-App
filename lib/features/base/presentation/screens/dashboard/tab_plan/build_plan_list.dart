@@ -29,14 +29,9 @@ return stateGetPlan.maybeWhen(orElse: () {
   child: const CircularProgressIndicator());
 },
 error: (error, stackTrace) {
-   return ElevatedButton(onPressed: (){
-     Future.delayed(Duration.zero).then(
-      (_)   {
-if (!context.mounted) return;
+   return OnDataError(callback:(){
       ref.read(stateGetPlanProvider.notifier).getPlanData();
-      }
-     );
-   }, child: const Text("Reload"));
+   });
 },
 data: (data) {
   print("welcome");
@@ -132,6 +127,27 @@ loading: () {
 );
 
     
+  }
+}
+
+class OnDataError extends StatelessWidget {
+  final Function callback;
+  const OnDataError({
+    super.key,
+    required this.callback
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(onPressed: (){
+      Future.delayed(Duration.zero).then(
+       (_)   {
+    if (!context.mounted) return;
+    callback();
+      
+       }
+      );
+    }, child: const Text("Reload"));
   }
 }
 

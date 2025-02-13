@@ -4,6 +4,8 @@ import 'package:gymlogix/features/base/data/datasources/api_endpoints.dart';
 import 'package:gymlogix/features/base/data/datasources/network_error.dart'; 
 import 'package:gymlogix/network/gymlogix_remote.dart';
 
+import 'models/model_get_exercises.dart';
+
  
 // abstract class WorkoutDsRepo  {
 //   Future<Either<Failure, dynamic>> createNewWorkout(String email, String pass); 
@@ -20,5 +22,21 @@ return right( ["obj.data"]);
     }
     return left(apiStatus.status);
     
+  }
+
+  Future<Either<NetworkAPIStatus, List<ExerciseData>>> getExercies() async {
+   
+    final apiStatus = await  remote.requestGetType( endPoint: ApiEndpoints.getExercises);
+    print("getExercies calling");
+    if (apiStatus.status == NetworkAPIStatus.success){
+    final obj =   ModelGetExercises.fromJson(apiStatus.data);
+    if (obj.status == 0) {
+return right( obj.data!);
+    }else {
+      return left(apiStatus.status);
+    }
+  
+    }
+    return left(apiStatus.status);
   }
 }

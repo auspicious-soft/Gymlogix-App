@@ -22,10 +22,10 @@ return Container(
                 ),
                 child: Stack(
                   children: [
-                    const Align(
+                      Align(
                         alignment: Alignment.topCenter,
                         child: Label(
-                          txt: "Start building your program",
+                          txt: topTitle,
                           type: TextTypes.f_20_900i,
                           forceColor: AppColors.whiteColor,
                         )),

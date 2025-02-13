@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart'; 
 import 'package:gymlogix/features/food/data/models/get_meal_model.dart'; 
 import 'package:gymlogix/features/workout/data/workout_ds_impl.dart';
-import 'package:gymlogix/features/workout/domain/create_workout_usecase.dart';
+import 'package:gymlogix/features/workout/domain/usecases/create_workout_usecase.dart';
   
 
 

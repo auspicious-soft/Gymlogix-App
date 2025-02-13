@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 
 import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
+import 'package:gymlogix/features/workout/presentation/providers/exercise_provider.dart';
 
-class PgViewexercise extends StatefulWidget {
-  const PgViewexercise({super.key});
+class PgViewExercise extends ConsumerStatefulWidget {
+  const PgViewExercise({super.key});
 
   @override
-  State<PgViewexercise> createState() => _PgViewexerciseState();
+  ConsumerState<PgViewExercise> createState() => _PgViewexerciseState();
 }
 
-class _PgViewexerciseState extends State<PgViewexercise> {
+class _PgViewexerciseState extends ConsumerState<PgViewExercise> {
   int selectedIndex = 1; // Default selected index
   final List<String> percentages = ["0%", "10%", "20%"]; // Picker items
-
+@override
+  void initState() {
+   print("At Page view");
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+
+    
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       body: Column(

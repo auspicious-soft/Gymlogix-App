@@ -1,8 +1,8 @@
 
 
 Project:Gymlogix
-Day: 5
-Date: Wed 12 Feb
+Day: 6
+Date: Wed 13 Feb
 Task  
 1.Cleaned up login page
 2.Cleaned up signup page 
