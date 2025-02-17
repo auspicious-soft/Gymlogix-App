@@ -4,14 +4,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/app_settings/constants/app_dim.dart';
-import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
+import 'package:gymlogix/features/authorisatiion/login/widgets/btn_forget_pss.dart';
+import 'package:gymlogix/features/authorisatiion/login/widgets/field_email.dart';
+import 'package:gymlogix/generic_widgets/common_button.dart';
 import 'package:gymlogix/extensions/extend_string.dart';
 import 'package:gymlogix/features/base/data/datasources/user_storage.dart';
 import 'package:gymlogix/features/base/data/models/login_model.dart';
 import 'package:gymlogix/features/base/presentation/providers/login_provider.dart';
 import 'package:gymlogix/features/base/presentation/screens/dashboard/pg_dashboard.dart';
-import 'package:gymlogix/features/helpers/global_widgets/pos_background.dart';
-import 'widgets.dart';
+import 'package:gymlogix/generic_widgets/pos_background.dart';
+import 'widgets/btn_google.dart';
+import 'widgets/btn_already_hav_acc.dart';
+import '../../../generic_widgets/common_btn_privacy_term.dart';
+import 'widgets/field_password.dart';
 
 class PgLogin extends ConsumerStatefulWidget {
   const PgLogin({super.key});
@@ -119,7 +124,7 @@ class PgLoginState extends ConsumerState<PgLogin> {
                               const BtnForgetPassword(),
                               // const SizedBox(height: 30),
                               const BtnAlreadyHaveAnAccount(),
-                              const BtnPrivacyAndTerm(),
+                              const CommonBtnPrivacyTerm(),
                               padVertical(40),
                             ],
                           ),

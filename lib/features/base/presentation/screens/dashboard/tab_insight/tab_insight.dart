@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gymlogix/Models/model_view.dart';
 
-import 'package:gymlogix/Widgets/common_header.dart';
+import 'package:gymlogix/generic_widgets/common_header.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/features/base/presentation/screens/dashboard/tab_insight/Widgets/insight_card.dart';
 

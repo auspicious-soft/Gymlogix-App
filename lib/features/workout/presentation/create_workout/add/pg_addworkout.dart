@@ -4,7 +4,7 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:gymlogix/features/helpers/global_widgets/program_header.dart';
+import 'package:gymlogix/generic_widgets/program_header.dart';
 import 'package:gymlogix/features/workout/presentation/create_exercise/AddExerciseDays/pg_add_ex_days.dart';
 import 'package:gymlogix/features/workout/presentation/widgets/plan_header.dart';
 

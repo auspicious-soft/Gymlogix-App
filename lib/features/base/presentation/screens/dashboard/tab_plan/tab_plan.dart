@@ -6,7 +6,7 @@ import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
-import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
+import 'package:gymlogix/generic_widgets/common_button.dart';
 import 'package:gymlogix/features/base/presentation/providers/foodplan_provider.dart';
 
 import 'package:gymlogix/features/workout/presentation/create_exercise/createexercise/pg_createexericse.dart';

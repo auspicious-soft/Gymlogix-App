@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gymlogix/Models/model_view.dart';
 
-import 'package:gymlogix/Services/api_service.dart';
+import 'package:gymlogix/network/services/api_service.dart';
 
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';

@@ -4,11 +4,11 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/app_settings/constants/app_dim.dart';
-import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
+import 'package:gymlogix/generic_widgets/common_button.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
 import 'package:gymlogix/features/food/presentation/CreateFood/pg_addfood.dart';
 
-import '../../../helpers/global_widgets/program_header.dart';
+import '../../../../generic_widgets/program_header.dart';
 
 class PgCreatefood extends ConsumerStatefulWidget {
   const PgCreatefood({super.key});

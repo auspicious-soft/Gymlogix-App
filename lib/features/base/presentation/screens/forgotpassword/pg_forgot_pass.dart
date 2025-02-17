@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gymlogix/Services/api_service.dart';
+import 'package:gymlogix/network/services/api_service.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
@@ -7,7 +7,7 @@ import 'package:gymlogix/app_settings/constants/app_config.dart';
 import 'package:gymlogix/app_settings/constants/app_const.dart';
 import 'package:flutter/gestures.dart';
 import 'package:gymlogix/app_settings/constants/app_dim.dart';
-import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
+import 'package:gymlogix/generic_widgets/common_button.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:gymlogix/features/authorisatiion/login/pg_login.dart';
 

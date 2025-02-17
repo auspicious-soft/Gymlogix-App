@@ -7,13 +7,21 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/components/widget_global_margin.dart'; 
 import 'package:gymlogix/app_settings/constants/app_colors.dart'; 
 import 'package:gymlogix/app_settings/constants/app_dim.dart';
-import 'package:gymlogix/features/authorisatiion/login/widgets.dart';
-import 'package:gymlogix/features/authorisatiion/signup/widgets.dart';
-import 'package:gymlogix/features/helpers/global_widgets/common_button.dart'; 
+import   'package:gymlogix/generic_widgets/common_btn_privacy_term.dart'; 
+import 'package:gymlogix/generic_widgets/common_button.dart'; 
 import 'package:gymlogix/features/base/presentation/providers/signup_provider.dart';
 import 'dart:async';
 import 'package:gymlogix/features/base/presentation/screens/bestprograms/pg_bestprograms.dart';
 import 'package:gymlogix/features/authorisatiion/login/pg_login.dart';
+
+import 'widgets/btn_already_have_acc.dart';
+import 'widgets/btn_continue_with_google.dart';
+import 'widgets/error_title.dart';
+import 'widgets/field_confirm_pass.dart';
+import 'widgets/field_email.dart';
+import 'widgets/field_first_lst_name.dart';
+import 'widgets/field_password.dart';
+import 'widgets/signup_loader.dart';
 
 class PgSignup extends ConsumerStatefulWidget {
   const PgSignup({super.key});
@@ -208,11 +216,11 @@ class _PgSignupState extends ConsumerState<PgSignup> {
         FieldEmailSignUp(emailController: emailController,formState: formState),
         const SizedBox(height: 20),
         FieldSignUpPassword(passwordController: passwordController,formState: formState),
-        const FieldErrorTitle(),
+        const ErrorTitle(),
         //confirm password
 
         FieldConfirmPassword(confirmPasswordController: confirmPasswordController,formState: formState),
-        const FieldErrorTitle(),
+        const ErrorTitle(),
         padVertical(
          20,
         ),
@@ -228,7 +236,7 @@ class _PgSignupState extends ConsumerState<PgSignup> {
         const SizedBox(height: 10),
         // const SizedBox(height: 30),
         const BtnAlreadyHaveAcc(),
-        const BtnPrivacyAndTerm()
+        const CommonBtnPrivacyTerm()
         
       ],
     );

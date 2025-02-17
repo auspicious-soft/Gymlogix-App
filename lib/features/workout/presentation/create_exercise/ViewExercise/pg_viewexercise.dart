@@ -4,7 +4,7 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 
-import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
+import 'package:gymlogix/generic_widgets/common_button.dart';
 import 'package:gymlogix/features/workout/presentation/providers/exercise_provider.dart';
 
 class PgViewExercise extends ConsumerStatefulWidget {

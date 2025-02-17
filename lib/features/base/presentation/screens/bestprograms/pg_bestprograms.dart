@@ -5,7 +5,7 @@ import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/components/widget_global_margin.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
-import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
+import 'package:gymlogix/generic_widgets/common_button.dart';
 import 'package:gymlogix/features/base/presentation/screens/customplans/pg_customplans.dart';
 import 'package:gymlogix/features/base/presentation/screens/dashboard/pg_dashboard.dart';
 

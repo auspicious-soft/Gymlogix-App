@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 
-import 'package:gymlogix/features/helpers/global_widgets/common_button.dart';
+import 'package:gymlogix/generic_widgets/common_button.dart';
 import 'package:gymlogix/features/authorisatiion/login/pg_login.dart';
 import 'package:gymlogix/features/base/presentation/screens/selectgoals/select_goals.dart';
 
