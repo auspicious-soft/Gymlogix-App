@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gymlogix/app_settings/components/label.dart';
-import 'package:gymlogix/app_settings/constants/app_assets.dart';
-import 'package:gymlogix/app_settings/constants/app_colors.dart';
+import    'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:gymlogix/features/base/presentation/screens/dashboard/tab_plan/build_plan_list.dart';
-import 'package:gymlogix/generic_widgets/pos_background.dart';
-import 'package:gymlogix/generic_widgets/program_header.dart';
-import 'package:gymlogix/features/workout/presentation/create_exercise/AddNewExercise/pg_add_newex.dart';
-import 'package:gymlogix/features/workout/presentation/create_exercise/ViewExercise/pg_viewexercise.dart';
-import 'package:gymlogix/features/workout/presentation/providers/exercise_provider.dart';
+import  'package:gymlogix/features/workout/presentation/widgets/exercise_list_widget.dart';
+import  'package:gymlogix/generic_widgets/program_header.dart';
+import  'package:gymlogix/features/workout/presentation/providers/exercise_provider.dart';
 import 'package:gymlogix/features/workout/presentation/widgets/plan_header.dart';
+
+import '../../../../../generic_widgets/common_button.dart';
 
 class PgAddexercise extends ConsumerStatefulWidget {
   const PgAddexercise({super.key});
@@ -36,6 +34,14 @@ class _PgAddexerciseState extends ConsumerState<PgAddexercise> {
     //  final exploreAsync = ref.watch(exploreItemsProvider);
 
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: commonButton(
+          txt: "Save",
+          context: context,
+          onPressed: () => {
+               Navigator.pop(context)
+          }
+        ),
       backgroundColor: AppColors.whiteColor,
       body: Column(
         children: [
@@ -126,7 +132,7 @@ class _PgAddexerciseState extends ConsumerState<PgAddexercise> {
           //   ),
           // ),
        ,
-         ProgramHeader(topTitle: "", subTitleLeft: "PPL Bulking\nTue Aug 23, 2024")
+         const ProgramHeader(topTitle: "", subTitleLeft: "PPL Bulking\nTue Aug 23, 2024")
             ,
           // Container(
           //   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -179,66 +185,19 @@ class _PgAddexerciseState extends ConsumerState<PgAddexercise> {
             });
           },
           loading: () {
-         return   CircularProgressIndicator();
+         return const   Text("");
           },
           data: (data) {
           return  Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: data.length, itemBuilder: (context, index) {
-              final obj = data[index];
-              return Container(
-                                       padding: const EdgeInsets.symmetric(
-                                           horizontal: 10, vertical: 10),
-                                       child: Row(
-                                         children: [
-                                           ClipRRect(
-                                               borderRadius:
-                                                   BorderRadius.circular(10),
-                                               child: SizedBox(
-                                                 height: 55,
-                                                 width: 55,
-                                                 child: Image.network(
-                                                  obj.moviesLogoUrl ?? "http",
-                                                   fit: BoxFit.contain,
-                                                 ),
-                                               )),
-                                           const SizedBox(
-                                             width: 15,
-                                           ),
-                                           Column(
-                                             mainAxisAlignment:
-                                                 MainAxisAlignment.center,
-                                             crossAxisAlignment:
-                                                 CrossAxisAlignment.start,
-                                             children: [
-                                                 Label(
-                                                 txt:obj.name ?? ""  ,
-                                                 type: TextTypes.f_15_500,
-                                               ),
-                                               SizedBox(
-                                                 width: MediaQuery.of(context)
-                                                         .size
-                                                         .width /
-                                                     1.8,
-                                                 child:   Label(
-                                                   txt: obj.description ?? "",
-                                                   type: TextTypes.f_10_500,
-                                                   forceColor: AppColors.grey,
-                                                 ),
-                                               )
-                                             ],
-                                           ),
-                                           const Spacer(),
-                                           const Icon(
-                                             Icons.info,
-                                             size: 20,
-                                             color: AppColors.primaryColor,
-                                           ),
-                                         ],
-                                       ),
-                                     );
-            },),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom:  80.0),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: data.length, itemBuilder: (context, index) {
+                final obj = data[index];
+                return ExerciseListWidget(obj: obj);
+              },),
+            ),
           );
           },
           ),
@@ -479,3 +438,4 @@ class _PgAddexerciseState extends ConsumerState<PgAddexercise> {
     );
   }
 }
+

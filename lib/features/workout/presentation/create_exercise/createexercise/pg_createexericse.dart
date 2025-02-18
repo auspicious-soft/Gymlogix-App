@@ -179,7 +179,7 @@ class _PgCreateexericseState extends State<PgCreateexericse> {
                           type: TextTypes.f_14_700,
                           forceColor: AppColors.primaryColor,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         Row(
@@ -201,7 +201,7 @@ class _PgCreateexericseState extends State<PgCreateexericse> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 40,
                             ),
                             Column(
@@ -222,7 +222,7 @@ class _PgCreateexericseState extends State<PgCreateexericse> {
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         Row(
@@ -265,7 +265,7 @@ class _PgCreateexericseState extends State<PgCreateexericse> {
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         Row(
@@ -321,7 +321,7 @@ class _PgCreateexericseState extends State<PgCreateexericse> {
                           type: TextTypes.f_14_700,
                           forceColor: AppColors.primaryColor,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -547,7 +547,7 @@ class _PgCreateexericseState extends State<PgCreateexericse> {
                         ),
                       ],
                     )),
-              SizedBox(height: 90),
+              const SizedBox(height: 90),
               commonButton(
                 txt: "Next",
                 context: context,
@@ -592,7 +592,7 @@ class _PgCreateexericseState extends State<PgCreateexericse> {
                     }
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ])));

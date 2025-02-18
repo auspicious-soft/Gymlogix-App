@@ -3,10 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:gymlogix/generic_widgets/program_header.dart';
+import 'package:gymlogix/features/workout/data/models/model_get_exercises.dart';
 import 'package:gymlogix/features/workout/presentation/create_exercise/AddExerciseDays/pg_add_ex_days.dart';
-import 'package:gymlogix/features/workout/presentation/widgets/plan_header.dart';
+import  'package:gymlogix/generic_widgets/common_dotted_btn.dart';
+import 'package:gymlogix/generic_widgets/program_header.dart';
+import   'package:gymlogix/features/workout/presentation/widgets/plan_header.dart'; 
+import '../../../../../generic_widgets/common_button.dart';
+import '../../../../../generic_widgets/common_datalist_highligther.dart';
+import '../../../../base/presentation/screens/dashboard/tab_plan/build_plan_list.dart';
+import '../../providers/exercise_provider.dart'; 
 
 class PgAddworkout extends ConsumerStatefulWidget {
   const PgAddworkout({super.key});
@@ -16,9 +21,29 @@ class PgAddworkout extends ConsumerStatefulWidget {
 }
 
 class _PgAddworkoutState extends ConsumerState<PgAddworkout> {
+  // ref.watch(stateGetExerciseProvider.notifier);
+   List<PackageCollectionBox> stateExercises = [];
+@override
+  void initState() {
+      stateExercises = ref.read(stateGetExerciseProvider.notifier).getPackedExercise();
+
+    print("kokokok");
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    //attatch Exercise builder 
+   print("uooi77777777777j");
+     
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: commonButton(
+          txt: "Create Now",
+          context: context,
+          onPressed: () => {
+            //togglePage(youWantForward: true)},
+          }
+        ),
         backgroundColor: AppColors.whiteColor,
         body: SingleChildScrollView(
             child: Column(children: [
@@ -41,7 +66,7 @@ class _PgAddworkoutState extends ConsumerState<PgAddworkout> {
           //   ),
           // ),
           Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            ProgramHeader(topTitle: "", subTitleLeft: "PPL Bulking\nTue Aug 23, 2024")
+            const ProgramHeader(topTitle: "", subTitleLeft: "PPL Bulking\nTue Aug 23, 2024")
             ,
             // Container(
             //   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -186,50 +211,99 @@ class _PgAddworkoutState extends ConsumerState<PgAddworkout> {
               type: TextTypes.f_14_700,
               forceColor: AppColors.primaryColor,
             ),
-            Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 60),
-                child: GestureDetector(
-                    onTap: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const PgAddExDays()),
-                          )
-                        },
-                    child: DottedBorder(
-                      color: const Color.fromRGBO(147, 141, 141, 1),
-                      strokeWidth: 1,
-                      borderType: BorderType.RRect,
-                      radius: const Radius.circular(15),
-                      dashPattern: const [6, 3],
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        height: 61,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.add_circle_outline,
-                              color: Color.fromRGBO(147, 141, 141, 1),
-                            ),
-                            SizedBox(width: 20),
-                            Text(
-                              "Add workout",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromRGBO(147, 141, 141, 1),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ))),
+            stateExercises.isEmpty ?
+            //  stateExercises.isEmpty ?
+  CommonDottedButton(onClick:(){
+    Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => const PgAddExDays()),
+).then((value) {
+  // Called when SecondScreen is popped
+  setState(() {
+     stateExercises = ref.read(stateGetExerciseProvider.notifier).getPackedExercise();
+
+  });
+   
+});
+ 
+}) :
+             Column(
+               children: [
+                 ListView.builder(
+                   physics: const NeverScrollableScrollPhysics(),
+                   shrinkWrap: true,
+                   itemCount: stateExercises.length,
+                   itemBuilder:(context , index){
+                    final objData = stateExercises[index];
+                  return   Padding(
+                    padding: const EdgeInsets.only(left: 15.0,right: 15,top: 15),
+                    child: CommonDatalistHighligther(
+                                title: objData.title, subTitle: objData.subTitle),
+                  );
+                 }),
+               InkWell( 
+                onTap: () {
+                   Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => const PgAddExDays()),
+).then((value) {
+  // Called when SecondScreen is popped
+  setState(() {
+     stateExercises = ref.read(stateGetExerciseProvider.notifier).getPackedExercise();
+
+  });
+   
+});
+                },
+                 child: Padding(
+                   padding: const EdgeInsets.only(right:15.0),
+                   child: Align(
+                    
+                                alignment: Alignment.centerRight,
+                                child: Container(
+                                  height: 30,
+                                  width: 74,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primaryColor,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: const Align(
+                                      alignment: Alignment.center,
+                                      child: Label(
+                                        txt: "Add",
+                                        type: TextTypes.f_15_500,
+                                        forceColor: AppColors.whiteColor,
+                                      )),
+                                )),
+                 ),
+               ),
+               ],
+             )
+//             stateExercises.when(data: (exercise){
+// return ListView.builder(
+//   physics: const NeverScrollableScrollPhysics(),
+//   shrinkWrap: true,
+//   itemCount: stateExercises.length,
+//   itemBuilder:(context , index){
+//  return const Padding(
+//    padding: EdgeInsets.all(15.0),
+//    child: CommonDatalistHighligther(
+//                             title: "Day 1", subTitle: "10 Exercise"),
+//  );
+// });
+//             }, 
+//              error:(error, stackTrace) {
+//           return  OnDataError(callback: (){
+
+//             });
+//           },
+//           loading: () {
+//              return const   CircularProgressIndicator();
+//           },
+//             ),
+              
+        
+            ,
             const SizedBox(
               height: 60,
             ),
@@ -256,7 +330,7 @@ class _PgAddworkoutState extends ConsumerState<PgAddworkout> {
               forceColor: AppColors.primaryColor,
             ),
             const Padding(
-                padding: EdgeInsets.all(15),
+                padding: EdgeInsets.only(left: 15,right: 15,top: 15,bottom: 50),
                 child: Align(
                     alignment: Alignment.topLeft,
                     child: (Label(
@@ -264,7 +338,10 @@ class _PgAddworkoutState extends ConsumerState<PgAddworkout> {
                       type: TextTypes.f_12_500i,
                       forceColor: AppColors.privacyTxt,
                     )))),
+
+                   const  SizedBox(height: 100,)
           ])
         ])));
   }
 }
+

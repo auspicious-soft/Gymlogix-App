@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:gymlogix/app_settings/components/label.dart';
 import 'package:gymlogix/app_settings/constants/app_assets.dart';
-import 'package:gymlogix/app_settings/constants/app_colors.dart';
-
-import 'package:dotted_border/dotted_border.dart';
-import 'package:gymlogix/features/food/presentation/CreateFood/widget_meal_list.dart';
+import 'package:gymlogix/app_settings/constants/app_colors.dart'; 
+import 'package:dotted_border/dotted_border.dart'; 
 import 'package:gymlogix/generic_widgets/program_header.dart';
-import 'package:gymlogix/features/base/presentation/providers/explore_provider.dart';
-import 'package:gymlogix/features/base/presentation/providers/foodplan_provider.dart';
-import 'package:gymlogix/features/workout/presentation/create_exercise/AddExerciseDays/pg_add_ex_days.dart';
-
+import  'package:gymlogix/features/workout/presentation/create_exercise/AddExerciseDays/pg_add_ex_days.dart';
 import '../../../../generic_widgets/common_button.dart';
-import '../providers/food_source_provider.dart';
-import '../providers/get_meal_provider.dart';
-import '../widgets/meal_loader.dart';
+import '../../../../generic_widgets/common_datalist_highligther.dart'; 
 
 class DataForPageAddPlan {
   final String planName;
@@ -128,9 +120,9 @@ class _PgAddfoodState extends ConsumerState<PgAddfood> {
               type: TextTypes.f_14_700,
               forceColor: AppColors.primaryColor,
             ),
-            Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: WidgetMealList(
+            const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: CommonDatalistHighligther(
                           title: "My Meal 1", subTitle: "10 Foods"),
                     ),
 

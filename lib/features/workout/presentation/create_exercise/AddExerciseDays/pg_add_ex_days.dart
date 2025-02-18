@@ -4,6 +4,7 @@ import 'package:gymlogix/app_settings/constants/app_assets.dart';
 import 'package:gymlogix/app_settings/constants/app_colors.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:gymlogix/features/workout/presentation/create_exercise/AddExercise/pg_addexercise.dart';
+import 'package:gymlogix/generic_widgets/common_day_adder.dart';
 
 class PgAddExDays extends StatefulWidget {
   const PgAddExDays({super.key});
@@ -13,6 +14,17 @@ class PgAddExDays extends StatefulWidget {
 }
 
 class _PgAddExDaysState extends State<PgAddExDays> {
+    List<DayAdderData> dayExercise = [];
+ScrollController _scrollController = ScrollController();
+
+void scrollToEnd() {
+  _scrollController.animateTo(
+    _scrollController.position.maxScrollExtent,
+    duration: Duration(milliseconds: 200),
+    curve: Curves.easeOut,
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,37 +120,61 @@ class _PgAddExDaysState extends State<PgAddExDays> {
             const SizedBox(
               height: 20,
             ),
-            Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Align(
-                  alignment: Alignment.centerLeft,
+            SizedBox(
+              height: 40,
+              child:
+              Row(children: [
+                Expanded(
+                  child: ListView.builder(
+                    controller: _scrollController,
+                  scrollDirection: Axis.horizontal,
+                                 // shrinkWrap: true,
+                  itemCount: dayExercise.length,
+                  itemBuilder: (context , index){
+                    final data = dayExercise[index];
+                                return   CommonDayAdder(showRemove: true, title:  data.dayName, uniqueKey: data.key, onClick: (uKey){
+                                 setState(() {
+                                    dayExercise.removeAt(index);
+                                    scrollToEnd();
+                                 });
+                                 
+                                },);
+                                }),
+                ),
+                SizedBox(width: 10,),
+                InkWell(
+                  onTap: () {
+                    var  title = "day ${dayExercise.length + 1}";
+                    for (var obj in dayExercise) {
+                     if(obj.dayName == title){
+                      dayExercise.clear();
+                       title = "day ${dayExercise.length + 1}";
+                      break;
+                     }
+                    }
+                    final  data = DayAdderData(key: UniqueKey(), dayName: title,
+                     data: null);
+                     setState(() {
+                         dayExercise.add(data);
+                           scrollToEnd();
+                     });
+                 
+                  },
                   child: Container(
-                    height: 37,
-                    width: 151,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        color: AppColors.pink2),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Label(
-                          txt: "Day 1",
-                          type: TextTypes.f_16_700,
-                          forceColor: AppColors.whiteColor,
-                        ),
-                        SizedBox(
-                          height: 24,
-                          width: 24,
-                          child: Image.asset(
-                            AppAssets.edit,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
+                    padding: EdgeInsets.all(10),
+                    color: AppColors.red,
+                    child:  const SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: Icon(Icons.add,color: Colors.white,)
+                        
+                    ),),
+                ),
+                     SizedBox(width: 10,),
+              ],)
+               
+            ),
+          
             const SizedBox(
               height: 70,
             ),
@@ -409,3 +445,4 @@ class _PgAddExDaysState extends State<PgAddExDays> {
         ])));
   }
 }
+

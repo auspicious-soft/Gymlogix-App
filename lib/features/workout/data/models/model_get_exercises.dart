@@ -29,6 +29,7 @@ class ModelGetExercises {
 }
 
 class ExerciseData {
+  bool isSelected = false;
     int? exerciseId;
     String? name;
     String? description;
